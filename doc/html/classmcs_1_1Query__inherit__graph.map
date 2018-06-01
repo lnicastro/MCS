@@ -1,0 +1,4 @@
+<map id="mcs::Query" name="mcs::Query">
+<area shape="rect" id="node3" href="$classmcs_1_1Table.html" title="A class to directly set and retrieve value from a database table. " alt="" coords="17,155,87,181"/>
+<area shape="rect" id="node2" href="$classmcs_1_1RecordSet.html" title="The base class that implement the data abstraction layer. " alt="" coords="5,5,99,32"/>
+</map>

@@ -1,0 +1,28 @@
+var classmcs_1_1Client =
+[
+    [ "Client", "classmcs_1_1Client.html#a56021d7f137b0e5ffc628bc84a972837", null ],
+    [ "Client", "classmcs_1_1Client.html#ad28479a475d2536c13a2dbef04847aef", null ],
+    [ "~Client", "classmcs_1_1Client.html#ae6168aea1775aec685c0802a41a6de80", null ],
+    [ "chunksize", "classmcs_1_1Client.html#a94a5a9bd55ab744d02124dae25e406c0", null ],
+    [ "cid", "classmcs_1_1Client.html#ae126507a6664c1982a81005bcf5aee9b", null ],
+    [ "clearRecords", "classmcs_1_1Client.html#a590a2adeffd9900a56c2a751ecaec1e4", null ],
+    [ "event", "classmcs_1_1Client.html#afc1691edf62fb708ecfc3c8f14a572fa", null ],
+    [ "exec", "classmcs_1_1Client.html#a7b748c3cbe94712dfeee6074b66ff9e2", null ],
+    [ "fetch", "classmcs_1_1Client.html#acef4976954c9ab87afdfca9700f1da4d", null ],
+    [ "isConnected", "classmcs_1_1Client.html#a17911a7e44f1fa037655886431fb9a6a", null ],
+    [ "login", "classmcs_1_1Client.html#a9b92c81ac84801ef0ddf14c5a2c0d1ba", null ],
+    [ "operator=", "classmcs_1_1Client.html#a4c61398552e8ff56e52c25351e1c3973", null ],
+    [ "writeToFile", "classmcs_1_1Client.html#ab2ae95c97eb05773f1abd11e6de35008", null ],
+    [ "aux", "classmcs_1_1Client.html#ab835921d4292744b32974c62ad3ffe9d", null ],
+    [ "code", "classmcs_1_1Client.html#a84f1b08ffa401de6cbaae0a831d6b590", null ],
+    [ "connected", "classmcs_1_1Client.html#a07a0ccf0e7236743c8ad8f2865f13171", null ],
+    [ "fileDescriptor", "classmcs_1_1Client.html#ad27c51bb15c0ff75c04bf18e53977efe", null ],
+    [ "lchunksize", "classmcs_1_1Client.html#a7bffa6bfbb8be4c456fea1e5493a0178", null ],
+    [ "lcid", "classmcs_1_1Client.html#a4a7fc018f40d161399d4f30d43df89f3", null ],
+    [ "lpath", "classmcs_1_1Client.html#aa5dfb85843aeace52c24f560a5d263a8", null ],
+    [ "lrecord", "classmcs_1_1Client.html#a1a17a70686f5295de1ade968762e995e", null ],
+    [ "msg", "classmcs_1_1Client.html#a840bd72254b00d45cbdd9d8824c3442a", null ],
+    [ "out", "classmcs_1_1Client.html#ac724070ea2176e20db1aa2f0b68ea91a", null ],
+    [ "recv", "classmcs_1_1Client.html#aff0a361db00b2a9b0555d720d2177f47", null ],
+    [ "writetofile", "classmcs_1_1Client.html#adc63874fa52fc3a7b0639486399e61c2", null ]
+];

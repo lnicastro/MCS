@@ -1,0 +1,24 @@
+% Remember to use the lgrind style
+
+\Head{}
+\File{echosrv.cc}{2007}{3}{22}{0:33}{502}
+\L{\LB{\K{\#include}_\<\V{mcs}.\V{hh}\>}}
+\L{\LB{\K{using}_\K{namespace}_\V{mcs};}}
+\L{\LB{}}
+\L{\LB{\C{}//Customize_the_user_thread_class\CE{}}}
+\L{\LB{\V{MCS\_CUSTOM\_USER}(\V{User});}}
+\index{hk\_exec}\Proc{hk\_exec}\L{\LB{\V{RetValue}_\V{hk\_exec}(\V{CommandParser}*_\V{cmd},_\K{bool}\&_\V{cmd\_executed})}}
+\L{\LB{\{}}
+\L{\LB{}\Tab{2}{\V{string}_\V{s}_=_\S{}\3You_said:_\3\SE{}_+_\V{cmd}\-\!\>\V{cline}();}}
+\L{\LB{}\Tab{2}{\K{return}_\V{Send}(_\V{MCS\_OK}(_\V{MSG\_OUT},_\V{s})_);}}
+\L{\LB{\}}}
+\L{\LB{\V{MCS\_CUSTOM\_USER\_END}(\V{User});}}
+\L{\LB{}}
+\L{\LB{\C{}//Declare_a_customized_server_named_\3echosrv\3,\CE{}}}
+\L{\LB{\C{}//using_the_customized_user_class_\3User\3_(defined_above)\CE{}}}
+\L{\LB{\V{MCS\_CUSTOM\_SERVER}(\V{User},_\V{LocalThread});}}
+\L{\LB{}}
+\index{main}\Proc{main}\L{\LB{\K{int}_\V{main}(\K{int}_\V{argc},_\K{char}_*\V{argv}[\,])_\{}}
+\L{\LB{}\Tab{2}{\V{Env}*_\V{env}_=_\V{mcsCustomStart}(\S{}\3echosrv\3\SE{});}}
+\L{\LB{}\Tab{2}{\V{mcsWait}(\V{env});}}
+\L{\LB{\}}}

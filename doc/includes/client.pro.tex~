@@ -1,0 +1,67 @@
+% ----------------------------------------------------------------------^
+% Copyright (C) 2004, 2005, 2006, 2007, 2008 Giorgio Calderone
+% (mail to: <gcalderone@ifc.inaf.it>)
+% 
+% This file is part of MCS.
+% 
+% MCS is free software; you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 2 of the License, or
+% (at your option) any later version.
+% 
+% MCS is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with MCS; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+% 
+% ----------------------------------------------------------------------$
+% Remember to use the lgrind style
+
+\Head{}
+\File{client.pro}{2007}{3}{21}{23:49}{1085}
+\L{\LB{@\V{libidl2mcs}.\V{pro}}}
+\L{\LB{}}
+\L{\LB{\V{PRO}_\V{client}}}
+\L{\LB{}}
+\L{\LB{\V{cli}_=_\V{new\_Client}(\N{0},_\S{}\3./\3\SE{},_\S{}\3localhost\3\SE{},_\N{6523})_;}}
+\L{\LB{}}
+\L{\LB{\V{dummy}_=_\V{Client\_login}(\V{cli},_\S{}\3mcstest\3\SE{},_\S{}\3mcstest\3\SE{},_\S{}\3test\3\SE{})_;}}
+\L{\LB{}}
+\L{\LB{\V{dummy}_=_\V{Client\_exec}(\V{cli},_\S{}\3CID\3\SE{},_\V{ifd\_null}())_;}}
+\index{Data\_ival}\Proc{Data\_ival}\L{\LB{\V{print},_\S{}\3Client_identifier_is:_\3\SE{},_\V{Data\_ival}(_\V{Record\_field}(_\V{Client\_aux}(\V{cli}),_\N{0})_)}}
+\L{\LB{}}
+\L{\LB{\V{dummy}_=_\V{Client\_exec}(\V{cli},_\S{}\3CID_\-help\3\SE{},_\N{0})}}
+\L{\LB{\V{FOR}_\V{i}=\N{0},_\V{Record\_count}(_\V{Client\_out}(\V{cli})_)\-\N{1}_\V{DO}_\V{BEGIN}}}
+\L{\LB{}\Tab{4}{\V{print},_\V{Data\_sval}(_\V{Record\_field}(_\V{Client\_out}(\V{cli}),_\V{i}_)_)}}
+\L{\LB{\V{ENDFOR}}}
+\L{\LB{}}
+\L{\LB{\V{dummy}_=_\V{Client\_exec}(\V{cli},_\S{}\3qry_SELECT_*_FROM_mcstest\3\SE{},_\N{0})}}
+\L{\LB{\V{print},_\S{}\3Number_of_rows:_\3\SE{},_\V{RecordSet\_nRows}(\V{cli})}}
+\L{\LB{}}
+\L{\LB{\V{FOR}_\V{i}=\N{0},_\V{RecordSet\_nFields}(\V{cli})\-\N{1}_\V{DO}_\V{BEGIN}}}
+\L{\LB{}\Tab{4}{\V{print},_\V{Data\_name}(_\V{Record\_field}(_\V{RecordSet\_metarec}(\V{cli}),_\V{i}_)_),_\V{FORMAT}=\S{}{'}(A,_\$){'}\SE{}}}
+\L{\LB{\V{ENDFOR}}}
+\L{\LB{\V{print},_\S{}\3\3\SE{}}}
+\L{\LB{}}
+\L{\LB{\V{WHILE}(_\V{RecordSet\_eof}(\V{cli})_.\V{eq}._\N{0})_\V{DO}_\V{BEGIN}}}
+\L{\LB{}\Tab{4}{\V{FOR}_\V{i}=\N{0},_\V{RecordSet\_nFields}(\V{cli})\-\N{1}_\V{DO}_\V{BEGIN}}}
+\L{\LB{}\Tab{8}{\V{print},_\V{Data\_sval}(_\V{Record\_field}(_\V{RecordSet\_rec}(\V{cli}),_\V{i}_)_),_\V{FORMAT}=\S{}{'}(A,_\$){'}\SE{}}}
+\L{\LB{}\Tab{4}{\V{ENDFOR}}}
+\L{\LB{}\Tab{4}{\V{print},_\S{}\3\3\SE{}}}
+\L{\LB{}}
+\L{\LB{}\Tab{4}{\V{dummy}_=_\V{RecordSet\_setNext}(\V{cli})}}
+\L{\LB{\V{ENDWHILE}}}
+\L{\LB{}}
+\L{\LB{\V{IF}_(\V{ifd\_got\_error}()_.\V{ne}._\N{0})_\V{THEN}_\V{BEGIN}}}
+\L{\LB{}\Tab{4}{\V{print},_\S{}\3ERROR:_\3\SE{},_\V{ifd\_last\_error}()}}
+\L{\LB{}\Tab{4}{\V{CALL}_\V{ifd\_reset\_error}()}}
+\L{\LB{\V{ENDIF}}}
+\L{\LB{}}
+\L{\LB{\V{dummy}_=_\V{Client\_exec}(\V{cli},_\S{}\3BYE\3\SE{},_\N{0})}}
+\L{\LB{\V{del\_Client}(\V{cli})}}
+\L{\LB{}}
+\L{\LB{\V{END}}}

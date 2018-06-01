@@ -1,0 +1,22 @@
+#include <mcs.hh>
+using namespace mcs;
+
+#include "test.h"
+
+int main()
+{
+    DBConn db;
+    Query* qry;
+    
+    try {
+	db.connect(TEST_USER, TEST_PASS, TEST_DBNA, "localhost");
+
+	qry = new Query(&db);
+
+	qry->query("CREATE TABLE IF NOT EXISTS pippo (c CHAR(10), i INT, f FLOAT)");
+	qry->query("DROP TABLE pippo");
+    }
+    catch (Event e) {
+	cerr << e.msg() << endl;
+    }
+}

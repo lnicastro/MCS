@@ -1,0 +1,5 @@
+<map id="mcs::FITSWriter" name="mcs::FITSWriter">
+<area shape="rect" id="node2" href="$classmcs_1_1Record.html" title="A dynamic array of Data objects. " alt="" coords="72,80,151,107"/>
+<area shape="rect" id="node3" href="$classmcs_1_1Serializable.html" title="Serialize memory buffers or files into chunks. " alt="" coords="5,5,103,32"/>
+<area shape="rect" id="node4" href="$classmcs_1_1Synchro.html" title="A simple class to implement &quot;critical sections&quot;. " alt="" coords="127,5,210,32"/>
+</map>

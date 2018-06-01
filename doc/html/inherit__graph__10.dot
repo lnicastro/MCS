@@ -1,0 +1,19 @@
+digraph G
+{
+  edge [fontname="FreeSans.ttf",fontsize=10,labelfontname="FreeSans.ttf",labelfontsize=10];
+  node [fontname="FreeSans.ttf",fontsize=10,shape=record];
+  rankdir=LR;
+  Node1 [label="mcs::HostInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1HostInfo.html",tooltip="Retrieve informations about a network host."];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node2 [label="mcs::Socket",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1Socket.html",tooltip="Manage TCP sockets."];
+  Node2 -> Node3 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node3 [label="mcs::Client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1Client.html",tooltip="Connect to a MCS server as a client."];
+  Node4 [label="mcs::RecordSet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1RecordSet.html",tooltip="The base class that implement the data abstraction layer."];
+  Node4 -> Node3 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node4 -> Node5 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node5 [label="mcs::FITSReader",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1FITSReader.html",tooltip="Read a FITS file."];
+  Node4 -> Node6 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node6 [label="mcs::Query",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1Query.html",tooltip="Execute queries on the database."];
+  Node6 -> Node7 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node7 [label="mcs::Table",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1Table.html",tooltip="A class to directly set and retrieve value from a database table."];
+}

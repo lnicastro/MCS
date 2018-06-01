@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classmcs_1_1Thread.html" title="A class to create separate threads. " alt="" coords="5,81,83,108"/>
+<area shape="rect" id="node2" href="$classmcs_1_1BaseThread.html" title="Base class for MCS threaded objects. " alt="" coords="131,56,231,83"/>
+<area shape="rect" id="node6" href="$classmcs_1_1ThreadFunc.html" title="mcs::ThreadFunc" alt="" coords="131,107,231,133"/>
+<area shape="rect" id="node3" href="$classmcs_1_1LocalThread.html" title="Server side administrative thread. " alt="" coords="279,5,380,32"/>
+<area shape="rect" id="node4" href="$classmcs_1_1Server.html" title="Main server class for a MCS&#45;based application. " alt="" coords="291,56,367,83"/>
+<area shape="rect" id="node5" href="$classmcs_1_1UserThread.html" title="The server side client thread. " alt="" coords="280,107,379,133"/>
+</map>

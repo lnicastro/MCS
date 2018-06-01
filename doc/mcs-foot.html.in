@@ -1,0 +1,35 @@
+<hr size="1">
+<table border=0 bgcolor="9f95ff" width="100%">
+  <tr>
+    <td>
+      <a href="http://ross.iasfbo.inaf.it/MCS/" target="_blank">
+        <img src="mcslogo_ssss_c.gif" alt="mcslogo" align="left" border="0">
+      </a>
+    </td>
+<!--
+    <td>
+    <p align="middle">
+      <a href="http://ross.iasfbo.inaf.it/mcs/" target="_blank">
+         MCS (My Customizable Server)
+      </a>
+      <br>
+      <a href="mailto:Giorgio Calderone <gcalderone@ifc.inaf.it>">
+         Giorgio Calderone
+      </a>
+    </p>
+    </td>
+    <td>
+      <a href="mailto:Giorgio Calderone <gcalderone@ifc.inaf.it>">
+        <img src="mcslogo_sss_c.gif" alt="giorgio" align="right" border="0">
+      </a>
+    </td>
+-->
+    <td>
+        <p align="right">
+	MCS (My Customizable Server) ver. @VERSION@
+	<br>
+	Documentation generated on @TIMESTAMP@
+	</p>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,19 @@
+----------------------------------------------------------------------
+MCS example suite.
+Giorgio Calderone, IFC - INAF, gcalderone@ifc.inaf.it
+----------------------------------------------------------------------
+
+This directory contains some examples about MCS's classes.
+
+Before running the programs you should check that you have:
+ - a MySQL server running
+ - a database named 'test'
+ - a MySQL account (username 'mcstest' and password 'mcstest') that can create
+   tables in the 'test' database, this can be done on a mysql client program
+   with the following SQL statement:
+
+   GRANT ALL PRIVILEGES ON test.* TO mcstest@localhost IDENTIFIED BY 'mcstest';
+
+
+The programs can be compiled using the command 'make' in this
+directory.

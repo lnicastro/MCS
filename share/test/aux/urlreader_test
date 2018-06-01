@@ -1,0 +1,115 @@
+; Deafault demo1 (see query string)
+  mcshpdemo1, order=6
+
+; Deafault demo2 (see query string)
+  mcshpdemo2, order=6
+
+; Objects density per pixel for the ASCC 2.5 catalogue
+  mcshpdemo1, tabname='ASCC_25', query='select healpID from ASCC_25', col=5
+
+; Average B-V color per pixel for the ASCC 2.5 catalogue
+  mcshpdemo2, order=6, outfile='ascc_b-v.fits', $
+  query='select healpID,(Bcm-Vcm)/1e2 AS BmV from ASCC_25 where Bcm>0 and Vcm>0'
+
+; Replot in Galactic coords
+  mollview, 'ascc_b-v.fits', coord=['c','g'], grat=[30,30], title='ASCC B-V'
+
+; Downgrade from Nside 64 to 16 and plot the boundaries of Healpix pixels
+  loaddata_healpix, 'ascc_b-v.fits', dummy, map64
+  ud_grade, map64, map16, nside=16, order_in='RING'
+  mollview, map16, /ONLINE, coord=['c','g'], title='ASCC B-V', hbound=16
+
+; All the objects falling into a circle of radius 4 deg (use HTMCircle)
+  mcshpdemo1, tabname='UCAC_2', /gnomic, $
+  query='SELECT healpID FROM UCAC_2_htm WHERE DIF_HTMCircle(0,0,240)', $
+  OUTLINE={coord:'c', ra:[-4,4,4,-4,-4], dec:[-4,-4,4,4,-4], line:2}
+
+; All the objects falling into a square of side 8 deg (use HTMRect)
+  mcshpdemo1, tabname='UCAC_2', /gnomic, $
+  query='SELECT healpID FROM UCAC_2_htm WHERE DIF_HTMRect(0,0,480,480)', $
+  OUTLINE={coord:'c', ra:[-4,4,4,-4,-4], dec:[-4,-4,4,4,-4], line:2}
+
+; UCAC 2 fulll sky density
+  mcshpdemo1, tabname='UCAC_2', outfile='ucac2_cover_k8.fits', col=5, $
+  query='select healpID from UCAC_2'
+
+; PNG for ASCC 2.5 B-V map - galactic, mollview
+  mollview, 'ascc_b-v.fits', coord=['c','g'], /grat, $
+  title='ASCC 2.5: B-V map',units='(B-V)',png='ascc_b-v_gal.png'
+
+; PNG for UCAC 2 objects density - equatorial, orthographic
+  orthview, 'ucac2_cover_k8.fits', rot=[45,45], /grat, col=5, $
+  title='UCAC 2 - objects density', png='ucac2_density_orth.png'
+
+; PNG for UCAC 2 objects density - galactic, mollview
+  mollview, 'ucac2_cover_k8.fits', coord=['C','G'], /grat, col=5, $
+  title='UCAC 2 - objects density', png='ucac2_density_gal.png'
+
+; Remap into a Float array to mark empty pixels
+  loaddata_healpix, 'ucac2_cover_k8.fits', dummy, map
+  map2 = map*1.
+  map2[where(map eq 0)] = !values.f_nan
+  map=0
+  mollview, map2, /ONLINE,coord=['C','G'],/grat, col=5, $
+  title='UCAC 2 - objects density',png='ucac2_density_gal.png'
+
+  orthview, map2, /ONLINE,rot=[45,45],/grat, col=5, $
+  title='UCAC 2 - objects density',png='ucac2_density_orth.png'
+
+; SMC
+  hprectsel, tabname='GSC_22', rect=[13.175,-72.833,500,300], $
+  out='gsc22_smc_k8.fits'
+
+  loaddata_healpix, 'gsc22_smc_k8.fits', dummy, map
+  map2 = map*1.
+  map2[where(map eq 0)] = !values.f_nan
+  map=0
+  gnomview, map2, /ONLINE,rot=[13.175,-72.833], /grat, coord=['c','c'], col=5, $
+  title='GSC 2.2 - SMC region',png='gsc22_smc_k8.png', unit='Nr of entries'
+  mcshpdemo1, order=10, out='gsc22_smc_k10.fits', $
+  query='SELECT DIF_HEALPLookup(10,RAcs/3.6e5,DECcs/3.6e5) FROM GSC_22_htm WHERE DIF_HTMRect(13.175,-72.833,500,300)'
+  loaddata_healpix, 'gsc22_smc_k10.fits', dummy, map
+  map2 = map*1.
+  map2[where(map eq 0)] = !values.f_nan
+  map=0
+  gnomview, map2, /ONLINE,rot=[13.175,-72.833], /grat, coord=['c','c'], col=5, $
+  title='GSC 2.2 - SMC region',png='gsc22_smc_k10.png', unit='Nr of entries'
+
+  mcshpdemo2, order=10, out='gsc22_smc_k10_b-r.fits', $
+  query='SELECT DIF_HEALPLookup(10,RAcs/3.6e5,DECcs/3.6e5),(Bcm-Rcm)/1e2 FROM GSC_22_htm WHERE DIF_HTMRect(13.175,-72.833,500,300) and Rcm>0 and Bcm>0'
+
+; Galactic Center (266.4,-28.94)
+  mcshpdemo1, order=10, out='gsc22_gc_k10.fits', $
+  query='SELECT DIF_HEALPLookup(10,RAcs/3.6e5,DECcs/3.6e5) FROM GSC_22_htm WHERE DIF_HTMRect(266.4,-28.94,120,120) and Rcm>0 and Bcm>0'
+
+  loaddata_healpix, 'gsc22_gc_k10.fits', dummy, map
+  map2 = map*1.
+  map2[where(map eq 0)] = !values.f_nan
+  map=0
+  gnomview, map2, /ONLINE,rot=[266.4,-28.94], /grat, coord=['c','c'], col=5, $
+  title='GSC 2.2 - M22 region',png='gsc22_m22_k10.png', unit='Nr of entries', $
+  res=0.5
+
+; M42
+  mcshpdemo1, order=10, out='gsc22_m42_k10.fits', $
+  query='SELECT DIF_HEALPLookup(10,RAcs/3.6e5,DECcs/3.6e5) FROM GSC_22_htm WHERE DIF_HTMRect(83.75,-4.583,400,400) and Rcm>0 and Bcm>0'
+
+  loaddata_healpix, 'gsc22_m42_k10.fits', dummy, map
+  map2 = map*1.
+  map2[where(map eq 0)] = !values.f_nan
+  map=0
+  gnomview, map2, /ONLINE,rot=[83.75,-4.583], /grat, coord=['c','c'], col=5, $
+  title='GSC 2.2 - M42 region',png='gsc22_m42_k10.png', unit='Nr of entries'
+
+; M31
+  mcshpdemo1, order=10, out='gsc22_m31_k10.fits', $
+  query='SELECT DIF_HEALPLookup(10,RAcs/3.6e5,DECcs/3.6e5) FROM GSC_22_htm WHERE DIF_HTMRect(10.675,41.268,200,200) and Rcm>0 and Bcm>0'
+
+  loaddata_healpix, 'gsc22_m31_k10.fits', dummy, map
+  map2 = map*1.
+  map2[where(map eq 0)] = !values.f_nan
+  map=0
+  gnomview, map2, /ONLINE,rot=[10.675,41.268],/grat, coord=['c','c'], col=5, $
+  title='GSC 2.2 - M31 region',png='gsc22_m31_k10.png', unit='Nr of entries', $
+  res=0.75
+

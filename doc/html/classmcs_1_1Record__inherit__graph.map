@@ -1,0 +1,6 @@
+<map id="mcs::Record" name="mcs::Record">
+<area shape="rect" id="node4" href="$classmcs_1_1ClientInfo.html" title="Class holding information about a client connection. " alt="" coords="10,155,98,181"/>
+<area shape="rect" id="node5" href="$classmcs_1_1FITSWriter.html" title="Write a fits file. " alt="" coords="123,155,217,181"/>
+<area shape="rect" id="node2" href="$classmcs_1_1Serializable.html" title="Serialize memory buffers or files into chunks. " alt="" coords="5,5,103,32"/>
+<area shape="rect" id="node3" href="$classmcs_1_1Synchro.html" title="A simple class to implement &quot;critical sections&quot;. " alt="" coords="127,5,210,32"/>
+</map>

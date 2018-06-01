@@ -1,0 +1,12 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classmcs_1_1Serializable.html" title="Serialize memory buffers or files into chunks. " alt="" coords="5,31,103,57"/>
+<area shape="rect" id="node2" href="$classmcs_1_1Data.html" title="A general purpose data type. " alt="" coords="175,5,241,32"/>
+<area shape="rect" id="node3" href="$classmcs_1_1Record.html" title="A dynamic array of Data objects. " alt="" coords="169,56,247,83"/>
+<area shape="rect" id="node4" href="$classmcs_1_1ClientInfo.html" title="Class holding information about a client connection. " alt="" coords="317,31,405,57"/>
+<area shape="rect" id="node5" href="$classmcs_1_1FITSWriter.html" title="Write a fits file. " alt="" coords="313,81,408,108"/>
+<area shape="rect" id="node6" href="$classmcs_1_1Synchro.html" title="A simple class to implement &quot;critical sections&quot;. " alt="" coords="13,180,95,207"/>
+<area shape="rect" id="node7" href="$classmcs_1_1Dynamic__Array.html" title="mcs::Dynamic_Array\l\&lt; int \&gt;" alt="" coords="151,107,265,149"/>
+<area shape="rect" id="node8" href="$classmcs_1_1Dynamic__Array.html" title="mcs::Dynamic_Array\l\&lt; mcs::Data \&gt;" alt="" coords="151,173,265,214"/>
+<area shape="rect" id="node9" href="$classmcs_1_1Dynamic__Array.html" title="mcs::Dynamic_Array\l\&lt; mcs::Record \&gt;" alt="" coords="151,238,265,279"/>
+<area shape="rect" id="node10" href="$classmcs_1_1Dynamic__Array.html" title="A thread safe, template class to handle an array of objects. " alt="" coords="151,303,265,345"/>
+</map>

@@ -1,0 +1,26 @@
+var classmcs_1_1FITSReader =
+[
+    [ "FITSReader", "classmcs_1_1FITSReader.html#a979703bcbb4c84432ff0b74641d8bfad", null ],
+    [ "~FITSReader", "classmcs_1_1FITSReader.html#a9a73db29ac0e1f4579cd5ad371b583cd", null ],
+    [ "close", "classmcs_1_1FITSReader.html#a7dd597965e95115cecd96ac165589b12", null ],
+    [ "currentHDU", "classmcs_1_1FITSReader.html#a2ffc7941947ae22c0d23c62886440567", null ],
+    [ "fetch", "classmcs_1_1FITSReader.html#aa87777af0ef207fbc084feb9f23e38f0", null ],
+    [ "ffile_is_compressed", "classmcs_1_1FITSReader.html#ae0560b47093b44ea6cb75c3f64b1040c", null ],
+    [ "HDUCount", "classmcs_1_1FITSReader.html#a0077c45dbf57ec7da232f23b679429c1", null ],
+    [ "open", "classmcs_1_1FITSReader.html#a8fd5c8d66c70402f453c1346013906aa", null ],
+    [ "open", "classmcs_1_1FITSReader.html#a147d48d7335044cfc9bfbd95aacf7fec", null ],
+    [ "read_json_header", "classmcs_1_1FITSReader.html#a1e3f78939ac681ef81bd8194e0dd0250", null ],
+    [ "selectHDU", "classmcs_1_1FITSReader.html#a391803d7ba4764431babba17a220f089", null ],
+    [ "selectHDU", "classmcs_1_1FITSReader.html#af2d8d9db972949605d3115df48f611e2", null ],
+    [ "selectNextHDU", "classmcs_1_1FITSReader.html#ad5df3beff3866917127687a4989e1c05", null ],
+    [ "fptr", "classmcs_1_1FITSReader.html#afe7dc3c64af4d5578b906a0a6922f513", null ],
+    [ "header", "classmcs_1_1FITSReader.html#a43a16cef81dc34e9c4d4637617093686", null ],
+    [ "header_comments", "classmcs_1_1FITSReader.html#a38e216bcdbe6cf84d44b3522d8eaac3e", null ],
+    [ "local", "classmcs_1_1FITSReader.html#a4bfbbc2de8b807cd326bad7e01695879", null ],
+    [ "memfile", "classmcs_1_1FITSReader.html#a8ed64c40983833ce695e3c9f4c9f4a9e", null ],
+    [ "memfilep", "classmcs_1_1FITSReader.html#a835609513d1b3ffa4e0055a45ef80464", null ],
+    [ "memfilesize", "classmcs_1_1FITSReader.html#ae9dcb433bff0e323df341ff6e7508a13", null ],
+    [ "ncols", "classmcs_1_1FITSReader.html#a8e545d6972e59479b8e03a3d64f465d3", null ],
+    [ "nhdu", "classmcs_1_1FITSReader.html#aa449a4fb6ba0da4621c60070c6804c14", null ],
+    [ "nrows", "classmcs_1_1FITSReader.html#ae1f86d5c8b0eb0e0d2826a19713ca4f7", null ]
+];

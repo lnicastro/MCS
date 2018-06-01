@@ -1,0 +1,13 @@
+
+#This is a comment
+
+line 1;
+line 2; #A line with a comment ;
+line $0;
+line $1; #A line with a comment ;
+
+line splitted
+	in two $2;
+
+line splitted       #with comment on the first line
+	in two $2;  #and on the second !"£$%&;/()='ì

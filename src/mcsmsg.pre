@@ -1,0 +1,251 @@
+// ----------------------------------------------------------------------^
+// Copyright (C) 2004, 2005, 2006, 2007, 2008 Giorgio Calderone
+// (mail to: <gcalderone@ifc.inaf.it>)
+// 
+// This file is part of MCS.
+// 
+// MCS is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+// 
+// MCS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with MCS; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// 
+// ----------------------------------------------------------------------$
+
+LOG_COMMAND                      0    "< %s"
+OK	    	  	         1    "OK."
+WELCOME		      		 2    "Welcome at %s running %s ver. %s"
+WELCOMEUSER			 3    "Welcome user %s."
+PASSWORD		    	 4    "OK."
+DBNAME				 5    "Database changed to %s"
+DBHOST		       		 6    "Database host changed to %s"
+CONNECTED		       	 7    "Login successfull (%s)"
+DB_ROWSAFF		       	 8    "Rows affected: " MCS_SEP "%d" MCS_SEP
+				
+SENDFILE_START			 9    "Sending file " MCS_SEP "%s" MCS_SEP
+SENDDATA_START               	10    "Sending data " MCS_SEP "%d" MCS_SEP
+RECVFILE_START               	11    "OK, receiving file %s"
+RECVDATA_START               	12    "OK, receiving data"
+FILE_STOP                    	13    "File received: %s"
+DATA_STOP                    	14    "End of data."
+				
+OUT                         	15    "%s"
+
+WAKE_UP                         16    "Wake up!"
+USERTHREAD_TERMINATING       	17    "Client thread is terminating..."
+CLIENT_ID	               	18    "Client ID: " MCS_SEP "%d" MCS_SEP ", chunk size: " MCS_SEP "%d" MCS_SEP
+BATCH_START                  	19    "BATCH(%d) exec: %s"
+BATCH_STOP                   	20    "BATCH(%d) finish."
+DB_QRY_OK    	       		21    "Query executed successfully."
+SCRIPT_START   		       	22    "Executing script: %s"
+SCRIPT_STOP          	        23    "Script execution ended."
+SQL_START         	        24    "Executing SQL script: %s"
+SQL_STOP          	        25    "SQL script execution ended."
+DQR_START         	        26    "Executing Data Query: %s"
+DQR_STOP          	        27    "Rows returned: " MCS_SEP "%d" MCS_SEP
+DB_FIELDS_DESCR   	        28    "Sending fields details " MCS_SEP "%d" MCS_SEP
+DB_FIELDS_DESCR2  	        29    "End fields details"
+SYS_EXIT_STATUS   	        30    "Exit status: %d"
+USER_HAS_GRANTS                 31    "User %s has grants : %d."
+THREAD_CREATE                   32    "%s\t\t\t\tcreated"
+THREAD_DESTROY                  33    "%s\t\t\t\tdestroyed"
+SERVER_DIR                      34    "APPD set to: %s"
+SERVER_RUNNING                  35    "MCS Server running on %s:%d"
+CREATING_LOCAL                  36    "Creating new LocalThread..."
+CREATING_CLIENT                 37    "Creating new UserThread on ID=%d..."
+LOCAL_THREAD_DIED               38    "Local thread died, shutting down server..."
+KILLING_CLIENT                  39    "Killing client %d..."
+KILLING_LOCAL                   40    "Killing local thread..."
+KILLING_ALL_CLIENTS             41    "Killing all clients..."
+COPYING_DATA_OBJECTS            42    "Copying Data objects in %s"
+NEW_RECORDSET                   43    "New RecordSet ready"
+FETCH_EOF                       44    "End of file reached"
+BYE			        49    "Bye."
+DUMMY                           50    ""
+
+
+
+//Low level errors
+CANT_OPEN_FILE                 102    "Can't open file %s"
+INVALID_SWITCH                 103    "Invalid value for switch: %d"
+METHOD_MUST_BE_OVERLOADED      104    "This virtual method needs to be overloaded: %s"
+NET_INTERFACE_NAME_NOT_EXISTS  105    "Interface named %s doesn't exists"
+NET_INTERFACE_ID_NOT_EXISTS    106    "Interface with index %d doesn't exists (total %d)"
+NET_INTERFACE_NOT_ACTIVE       107    "Interface %s is not active"
+RETRIEVING_INTERFACE_FLAGS     108    "Can't get flags for interface %s"
+RETRIEVING_HOSTNAME            109    "Error calling gethostbyname(): %s"
+RETRIEVING_PEERNAME            110    "Error calling getpeername(): %s"
+RETRIEVING_HOST_INFO           111    "Error calling gethostbyaddr(): %s"
+CANT_CONNECT_TO_HOST           112    "Can't connect to host: %s"
+TIME_OUT                       113    "Connection timed out"
+UNEXPECTED                     114    "Unexpected error. %s"
+CALLING_SELECT                 116    "Error calling select(): %s"
+CALLING_RECV                   117    "Error calling recv(): %s"
+CALLING_SEND                   118    "Error calling send(): %s"
+CLOSED_BY_PEER                 119    "Connection closed by peer"
+CALLING_BIND                   120    "Error calling bind(): %s"
+CALLING_LISTEN                 132    "Error calling listen(): %s"
+CALLING_PTHREAD_CREATE         133    "Error calling pthread_create()"
+OUT_OF_MEMORY                  134    "Out of memory"
+DIRECTORY_NOT_FOUND            135    "Directory not found: %s"
+CANT_MKDIR                     136    "Can't create directory: %s"
+CANT_RMDIR                     137    "Can't remove directory: %s"
+CANT_MKFIFO                    138    "Can't create FIFO file"
+CALLING_PIPE                   139    "Error calling pipe()"
+
+
+//Application errors
+ERROR                          200    "Error: %s"
+SYNTAX                         201    "Syntax error: %s"
+
+WRONG_DIM_SPEC                 207    "Wrong index for dim %d: %d"
+TYPE_NOT_HANDLED               208    "Data type not handled on field %d: %d"
+CONVERSION_STRING_INT          209    "Conversion error, STRING to INT"
+CONVERSION_BLOB_INT            210    "Conversion error, BLOB to INT"
+CONVERSION_STRING_FLOAT        211    "Conversion error, STRING to FLOAT"
+CONVERSION_BLOB_FLOAT          212    "Conversion error, BLOB to FLOAT"
+CONVERSION_DATETIME            213    "Conversion error (not a date and/or time): %s"
+CONVERSION_BLOB_DATETIME       214    "Conversion error, BLOB to DATETIME"
+CONVERSION_INT_BLOB            215    "Conversion error, INTEGER to BLOB"
+CONVERSION_FLOAT_BLOB          216    "Conversion error, DOUBLE to BLOB"
+CONVERSION_STRING_TOO_LONG     217    "Conversion error: string too long"
+CONVERSION_STRING_BLOB         218    "Conversion error, STRING to BLOB"
+CONVERSION_TIME_LINT           219    "Conversion error, TIME to number shorter than INT"
+
+CONVERSION_NAN                 220    "Conversion error: not a number"
+NOT_A_BLOB                     221    "Not a BLOB object"
+BLOB_TOO_BIG                   222    "BLOB too big: %d"
+QUEUE_FULL                     223    "Queue is full"
+INDEX_OUT_RANGE                224    "Index out of range: %d >= %d"
+MISSING_FIELD                  225    "Missing field: %s"
+INDEX_UNAVAILABLE              226    "Index unavailable: %d"
+ENTRY_UNAVAILABLE              227    "Entry not available: %s/%s"
+INDEX_LT_ZERO                  228    "Index less than zero: %d"
+SEND_ABORT_BY_RECEIVER         229    "Sending aborted by receiver"
+PROTOCOL                       230    "Communication protocol error: " MCS_SEP "%s" MCS_SEP
+NOT_ENOUGH_SPACE               231    "Not enough space in buffer: %d > %d"
+CANT_ALLOCATE_MYSQL            232    "Can't allocate MySQL connection handler"
+CANT_OPEN_MYSQL_CONNECTION     233    "Can't connect to MySQL server: %s"
+USE_ONLY_WITH_STORERESULT      234    "%s can be used only with storeResult()"
+MYSQL_ERROR                    235    "MySQL: %s"
+INVALID_POSITION               236    "Invalid position: %d"
+BIND_FAILED                    237    "Bind failed: %s"
+STMT_NOT_YET_PREPARED          238    "Statement not yet prepared"
+EMPTY_STRING                   239    "Empty string"
+CANT_GET_INFO_TABLE            240    "Cannot get info for table: %s"
+CANT_LOCK_TABLE                241    "Cannot lock table %s insert"
+CANT_UNLOCK_TABLE              242    "Cannot unlock tables"
+STMT_WRONG_NUM_PARAM           243    "Wrong number of parameter in prepared statement"
+NO_RESULT                      244    "No result available"
+NO_FIELDS                      245    "No fields in result"
+FITS_ERROR                     250    "FITS: %s"
+FITS_NOT_COMPILED              251    "CFITSIO feature hasn't been compiled"
+UNKNOWN_FILE_TYPE              260    "Unknown file type: %s"
+NOT_LOGIN                      261    "You didn't log in"
+MYSQL_DISABLED                 262    "MySQL feature is not enabled"
+GRANTS_LOGIN                   263    "You're not allowed to log in."
+GRANTS_DB_SCRIPT               264    "You're not allowed to execute DB scripts."
+GRANTS_SCRIPT                  265    "You're not allowed to execute shell scripts."
+GRANTS_QUERY                   266    "You're not allowed to execute direct queries."
+GRANTS_BATCH                   267    "You're not allowed to execute BATCH commands."
+GRANTS_ADMIN                   268    "You're not allowed to use administrative commands."
+GRANTS_GET                     269    "You're not allowed to use retrieve files."
+GRANTS_CANTGET_GRANTS          270    "Can't retrieve grants information."
+GRANTS_SYS                     271    "You're not allowed to issue system commands"
+GRANTS_PUT                     272    "You're not allowed to upload files."
+DB_ERR_NOTACTIVATED            273    "DB facility is not active"
+DB_NOT_COMPILED                274    "MySQL feature hasn't been compiled"
+SCRIPT_ERROR                   275    "Program quit with code" MCS_SEP "%d" MCS_SEP ", see err file"
+NO_MORE_CLIENT_ALLOWED         276    "No more clients allowed"
+OBJECT_MISSING                 277    "Object missing"
+SIZE_CHUNK                     278    "Size of a chunk cannot be less than one: %d"
+ALREADY_CONNECTED              279    "You already logged in."
+EXT_BIN_UNEXPECTED             280    "Program abnormal termination"
+NOT_CONNECTED                  281    "Socket not connected"
+EXT_NOT_AVAILABLE              282    "External program or script not available: %s"
+CHARACTER_NOT_ALLOWED          283    "Character not allowed: '%s'"
+CANT_SET_SYNCHRO_STATE         284    "Can't set synchro state now"
+NOT_A_RANDOM_ACCESS_RECORDSET  285    "Can't use method %s on a non random access recordset"
+ALREADY_AT_BEGIN_OF_FILE       286    "Already at begin of file"
+ALREADY_AT_END_OF_FILE         287    "Already at end of file"
+NO_METAREC                     288    "No meta information has been given"
+DONT_KNOW_NROWS                291    "Don't know how many records in the set"
+NO_SAME_META_INFO              292    "Records doesn't have the same meta structure"
+INSERT_NOT_ALLOWED             293    "Can't insert records while in fetch mode"
+FETCH_ERROR                    294    "Error while fetching record: %s"
+INCOMPATIBLE_SERIAL            295    "Incompatible Serializable objects: %d > %d"
+CANT_READ_CERT                 296    "Can't read certificate file: %s"
+CANT_READ_KEY                  297    "Can't read key file: %s"
+SSL_CONNECT_ERROR              298    "SSL connect error"
+SSL_ACCEPT_ERROR               299    "SSL accept error"
+UNKNOWN_USERID                 300    "Unknown user id: %d"
+YET_RUNNING                    301    "The thread is yet running"
+FILE_ALREADY_EXISTS            302    "File already exists: %s"
+PIPE_YET_OPENED                303    "Pipe is already opened, call \"closeRead()\" first."
+CANT_EXECUTE_FILE              304    "Can't execute file: %s"
+CANT_BIND_AND_HAVE_DIMSPEC     305    "The object can't be bind and have a dim spec"
+TOO_MANY_DIMSPEC               306    "Too many dim spec, max is %d"
+VARYING_MUST_BE_LAST           307    "There can be only one dynamic dimension and it must be the last"
+NO_DIM_ALLOWED_TO_CHANGE       308    "No dim is allowed to change"
+NO_ABSOLUTE_PATH               309    "Absolute paths are not allowed: %s"
+NO_DOUBLEDOT_PATH              310    "The \"..\" string is not allowed: %s"
+CANT_FREE_EXTERNAL_BUF         311    "Cannot free an externally-handled buffer"
+NO_WINDOWS_SELECTED            312    "No window has been selected"
+PIPE_NOT_CREATED               313    "Pipe has not been created."
+
+
+VOT_UNHANDLED_CODE             400    "Unhandled code: %d"
+VOT_PARSE_FAILED               401    "Parse failed on file: %s"
+VOT_CANT_OPEN_FILE             402    "Can't open file: %s"
+VOT_UNEXPECTED_NODE_TYPE       403    "Unexpected node type: %d"
+VOT_NOT_AN_INTEGER             404    "Not an integer value: %s"
+VOT_INVALID_NODETYPE           405    "Invalid element type: %s"
+VOT_INVALID_DATATYPE           406    "Invalid Datatype: %s"
+VOT_INVALID_ENCODINGTYPE       407    "Invalid EncodingType: %s"
+VOT_INVALID_RESOURCE_TYPE      408    "Invalid Resource_type: %s"
+VOT_INVALID_FIELD_TYPE         409    "Invalid Field_type: %s"
+VOT_INVALID_VALUES_TYPE        410    "Invalid Values_Type: %s"
+VOT_INVALID_LINK_CONTENT_ROLE  411    "Invalid Link_content_role: %s"
+VOT_INVALID_STREAM_TYPE        412    "Invalid Stream_type: %s"
+VOT_INVALID_STREAM_ACTUATE     413    "Invalid Stream_actuate: %s"
+VOT_INVALID_COOSYS_SYSTEM      414    "Invalid Coosys_system: %s"
+VOT_INVALID_INDEX              415    "Invalid index: %d"
+VOT_UNEXPECTED_ATTRIBUTE       416    "Unexpected attribute: %s"
+VOT_ROOT_IS_NOT_VOTABLE        417    "Root node is not a VOTABLE element: %s"
+
+
+CURL_ERROR                     500    "Curl error: %s"
+CURL_INIT                      501    "Cannot initialize CURL library"
+
+//SCR_EXEC_ERROR                 102    "Can't execute script"
+//OUT_CANT_STAT     	       107    "Can't get info from file: %s"
+//OUT_FILE_EMPTY     	       108    "File is empty"
+//SCRIPT_PATH                    110    "Script name can't contain the character '/'"
+//OUT_EXT_ERR                    111    "External error, more on err file"
+//SCRIPT_FAILURE                 113    "Program abnormal termination"
+//BATCH_TOO_MANY_NESTED          114    "Too many BATCH command nested."
+//NOT_ENOUGH_PARAM               115    "Not enough parameters."
+//CANT_CREATE_WORK_DIR           117    "Can't create work dir"
+//SCRIPT_DISABLED                119 "Execution of script is disabled"
+//			
+//
+//
+//SIZE_CHUNK                     150    "Size of a chunk cannot be less than one: %d"
+//DB_ERR		               200    "DB ERROR: %s."
+//DB_ERR_INIT		       201    "Insufficient memory to initialize a new database connection."
+//DB_ERR_SETOPT		       202    "Can't set CONNECT_TIMEOUT for DB connection."
+//DB_ERR_QUERY_FAILS	       203    "DB error: %s"
+//DB_ERR_LOGIN_DENIED	       204    "Access denied: %s"
+//DB_ERR_CONN_NOT_CONNECTED      205    "You didn't logged in."
+//DB_ERR_ALREADY_CONNECTED       206    "You already logged in."
+//DB_ERR_MISS_FIELD              207    "Missing info: %s"
+//DB_ERR_NORESULT                208    "No result set"
+

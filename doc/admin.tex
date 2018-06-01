@@ -1,0 +1,878 @@
+% ----------------------------------------------------------------------^
+% Copyright (C) 2004, 2005, 2006, 2007, 2008 Giorgio Calderone
+% (mailto: <gcalderone@ifc.inaf.it>)
+% 
+% This file is part of MCS.
+% 
+% MCS is free software; you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 2 of the License, or
+% (at your option) any later version.
+% 
+% MCS is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with MCS; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+% 
+% ----------------------------------------------------------------------$
+\chapter{Administrator's manual}
+In questo capitolo descriviamo le procedure per la configurazione,
+installazione e manutenzione di un'applicazione basata su
+\mcs. In particolare ci occuperemo di:
+\begin{itemize}
+\item Creare l'ambiente di esecuzione dell'applicazione;
+\item Scrivere il codice necessario per adattare \mcs ad una
+  applicazione specifica;
+\item Eseguire e mantenere tale applicazione;
+\end{itemize}
+
+
+\section{Dipendenze}\label{sec:dipendenze}
+Per creare una nuova applicazione basata su \mcs bisogna
+innanzitutto installare le librerie ed i programmi necessari, di cui
+riportiamo l'elenco:
+\begin{itemize}
+\item
+  \verb|CommonC++|\footnote{http://sourceforge.net/projects/cplusplus};
+\item \verb|pcre|
+  \footnote{ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre};
+\item \verb|mysqlclient|\footnote{www.mysql.com};
+\item \verb|perl|: \footnote{www.perl.com};
+\end{itemize}
+%
+Quindi bisogna assicurarsi che ci sia un server MySQL in esecuzione e
+che l'eseguibile di perl sia nel path per l'esecuzione.
+
+\section{Installazione di MCS}
+Il codice di \mcs viene fornito sotto forma di file
+\verb|tar.gz|. Esso va scaricato\footnote{il sito di riferimento \`e:
+...} e scompattato in una directory di propriet\`a dell'amministratore
+dell'applicazione. Prima di effettuare la compilazione \`e opportuno
+consultare la Sez.\ref{sec:dipendenze} per controllare che tutte le
+dipendenze siano soddisfatte. \`E possibile quindi eseguire i consueti
+comandi:
+\begin{itemize}
+\item \verb|configure|;
+\item \verb|make|;
+\item \verb|make install| (richiede i permessi di amministratore);
+\end{itemize}
+%
+Con i primi due si compila il codice sorgente della libreria
+\mcs. Con il secondo si installano i file necessari all'utilizzo
+della libreria stessa. In particolare viene installato nella directory
+\verb|/bin| il programma \verb|mcs-config| che pu\`o essere usato per
+ricavare i percorsi in cui sono memorizzati i file da includere e la
+libreria, nonch\`e le opzioni utilizzate per la compilazione della
+libreria \mcs. \`E consigliabile utilizzare le stesse opzioni
+per la compilazione del codice utente. Il command :
+
+\bigskip
+
+\verb|mcs-config --help|
+\bigskip\newline
+%
+fornisce una guida per l'utilizzo di \verb|mcs-config|. Vengono
+inoltre installati (per default in \verb|/usr/local/share/mcs|, pi\`u
+avanti ci riferiremo a tale directory con \verb|sharedir|) alcuni
+script, i programmi client in perl e IDL, i programmi di esempio e una
+struttura di directory con l'ambiente per le nuove applicazioni.
+
+\subsection{Switch di precompilazione}\label{ssec:switch}
+\`E possibile modificare alcuni switch di precompilazione nel codice
+che attivano o meno alcune funzionalit\`a. Tali switch si trovano nel
+file \verb|src/mcs_switch.h| della directory di distribuzione, essi
+vanno commentati o meno a seconda che si voglia o meno quella
+funzionalit\`a nel application server \mcs. Segue un elenco con
+descrizione dei singoli switch:
+\begin{enumerate}
+\item \verb|MCS_HAVE_DBH_CMD|: attiva il supporto per il command
+  \verb|DBH|, per il collegamento ad un server MySQL che non viene
+  eseguito sullo stesso computer del server \mcs, tale switch va
+  attivato solo se strettamente necessario;
+\item \verb|MCS_HAVE_SYS_CMD|: attiva il supporto per il
+  command \verb|SYS|, per l'esecuzione remota di comandi sul computer
+  che esegue il server \mcs, tale switch va attivato solo se
+  strettamente necessario;
+\end{enumerate}
+
+
+\section{Quick-start per la creazione di una nuova applicazione}
+Prima di procedere alla descrizione dettagliata del codice sorgente,
+delle tabelle e delle directory che costituiscono l'ambiente di
+esecuzione, illustriamo una procedura di quick-start che permette di
+configurare automaticamente lo stesso per una nuova
+applicazione. Tenendo presente che lo sviluppo di una nuova
+applicazione basata su \mcs richiede una lettura attenta di
+questo manuale, facciamo notare che nell'utilizzo comune il primo
+passo da eseguire \`e proprio quello di utilizzare tale procedura, per
+sollevare l'amministratore da compiti molto ripetitivi. Tale procedura
+consiste nell'esecuzione del programma \verb|mcs_newapp|. Si tratta di
+uno script interattivo che raccoglie informazioni sull'applicazione
+che si vuole creare, e configura l'ambiente per le'esecuzione. In
+particolare tale script si occupa di:
+
+\begin{itemize}
+\item copiare i file sorgente minimali da utilizzare come base di
+  partenza;
+\item creare le directory necessarie (opzionale);
+\item creare le tabelle necessarie nel database (opzionale);
+\item creare l'account utente dell'amministratore dell'applicazione,
+  come utente del database (opzionale, in tal caso viene richiesta la
+  password dell'account root del database);
+\end{itemize}
+%
+Infine vengono fornite alcune informazioni circa i file sorgente da
+modificare per l'adattamento di \mcs ed o comandi da utilizzare
+per la compilazione e l'utilizzo dell'applicazione.
+
+
+\section{Descrizione dell'ambiente}\label{prep_ambiente}
+Richiamando il paragone tra un servizio offerto da una applicazione
+basata su \mcs ed una shell, ci rendiamo conto che tale
+applicazione necessita di un ambiente di esecuzione. La creazione di
+tale ambiente \`e facoltativa, ma si rende necessaria se si vogliono
+sfruttare alcune caratteristiche di \mcs fra le quali:
+
+\begin{itemize}
+\item esecuzione di script e programmi;
+\item scrittura di log file;
+\item disponibilit\`a di una work directory per l'utente;
+\item possibilit\`a di gestire i permessi utente;
+\item possibilit\`a di memorizzare variabili di ambiente su database;
+\end{itemize}
+%
+L'ambiente di esecuzione consiste in una struttura di directory ed una
+serie di tabelle di database che verranno descritte di seguito, che
+possono essere create automaticamente tramite lo script
+\verb|mcs_newapp| descritto precedentemente. Al fine di descrivere
+l'ambiente di esecuzione di un'applicazione basata su \mcs
+elenchiamo i passi necessari alla preparazione dello stesso:
+
+\begin{enumerate}
+\item Creare un account utente di sistema e la sua home
+  directory. Tale utente rappresenta l'amministratore del sistema
+  informativo e tutte le informazioni relative verranno salvate nella
+  home directory, quindi \`e necessario che l'accesso ad essa sia
+  precluso a tutti gli altri utenti del computer. Pi\`u avanti ci
+  riferiremo a questo utente come \verb|SYS_USER|;
+\item Creare un account utente MySQL, non \`e necessario che abbia lo
+  stesso nome dell'account di sistema. Tale utente dovr\`a avere
+  accesso soltanto al database di cui al punto successivo. \`E
+  consigliabile utilizzare due password diverse per l'account di
+  sistema e l'account MySQL. Pi\`u avanti ci riferiremo a questo
+  utente come \verb|DB_USER|;
+\item Crere un database MySQL che manterr\`a tabelle di configurazione
+  e dati. Tale database dovrebbe avere un nome che ricorda
+  l'applicazione. Pi\`u avanti ci riferiremo a questo utente come
+  \verb|DB_NAME|. L'accesso a questo database dovr\`a essere
+  consentito soltanto all'utente MySQL di cui al punto precedente ed
+  agli utenti che accederanno al servizio. \`E altres\`i necessario
+  che il permesso di accedere per utenti MySQL siano consentiti
+  soltanto da '\verb|localhost|, questo perch\`e in realt\`a ad
+  accedere sar\'a il software \mcs stesso che supponiamo sia in
+  esecuzione sullo stesso computer;
+\item Creare una directory, sotto la home directory per la
+  memorizzazione dei file relativi all'applicazione. Tale directory
+  dovrebbe avere un nome che ricorda l'applicazione. Ribadiamo che
+  soltanto l'account \verb|SYS_USER| deve avere accesso a queste
+  directory. Pi\`u avanti ci riferiremo a questa directory come
+  \verb|APPD|, Application Directory;
+\item Creare una directory (usualmente \verb|APPD/src|) che conterr\`a
+  i file sorgente della nuova applicazione. \`E possibile copiare i
+  file presenti in \verb|sharedir/examples/mcstest| come punto di
+  partenza. Pi\`u avanti ci riferiremo a questa directory come
+  \verb|SRCD|, Source Directory;
+\end{enumerate}
+%
+Questo completa la prima parte della configurazione dell'ambiente. Di
+seguito bisogner\`a creare le tabelle del database e le directory che
+conterranno i programmi utilizzati dall'applicazione, nonch\`e le work
+directory degli utenti. Tali passi sono descritti nelle prossime
+sezioni.
+
+\subsection{Preparazione delle tabelle dei permessi e di ambiente}
+Le tabelle necessarie al funzionamento di \mcs sono:
+\verb|settings| e \verb|grants|, di cui riportiamo le istruzioni SQL
+per la creazione:
+\begin{verbatim}
+create table settings (
+  id      integer unsigned not null auto_increment,
+  fld     char(10),
+  val     char(15),
+  type    char(1) ,
+  primary key (id),
+  unique key (fld)
+);
+
+create table grants (
+  id    integer unsigned not null auto_increment,
+  username char(20),
+  grants int unsigned default 0,
+  primary key (id)
+);
+\end{verbatim}
+%
+Nella tabella \verb|settings| \`e possibile memorizzare variabili che
+regolano il funzionamento del sistema, alla stessa maniera delle
+variabili di ambiente per le shell. Tale tabella verr\`a caricata in
+memoria dall'oggetto \verb|MCSEnv| ed i valori possono essere
+recuperati utilizzando il metodo \verb|MCSEnv::var|. \`E possibile
+utilizzare le seguenti variabili che verranno lette all'avvio del
+programma:
+
+\begin{itemize}
+\item \verb|PORT|: porta su cui il server \mcs si metter\`a in
+  ascolto;
+\end{itemize}
+
+Un esempio delle istruzioni per creare tali variabili \`e:
+\begin{verbatim}
+insert into settings values(NULL, 'PORT', '6523', 'N');
+\end{verbatim}
+%
+Nella tabella \verb|grants| saranno memorizzati i diritti dei singoli
+utenti, specificando per ogni record il nome utente e la somma dei
+seguenti simboli, a seconda di quali diritti si vogliono assegnare. I
+singoli diritti attualmente riguardano la possibilit\`a di eseguire un
+certo command, la lista completa \`e la seguente:
+
+\begin{verbatim}
+#define MG_NO_GRANTS       0 - nessun diritto
+#define MG_LOGIN           1 - login consentito
+#define MG_SQL_SCRIPTS     2 - command SQL
+#define MG_SCRIPTS         4 - command SCR
+#define MG_QUERY           8 - command QRY
+#define MG_BATCH          16 - command BAT
+#define MG_GET            32 - command GET
+#define MG_PUT            64 - command PUT
+#define MG_SYS           128 - command SYS
+#define MG_ADMIN         256 - command ADM
+#define MG_ALL           511 - tutti i diritti
+\end{verbatim}
+%
+Questi simboli sono definiti nel file \verb|SRCD/src/settings.h|.
+
+\subsection{Preparazione delle directory dell'applicazione}
+Riferendoci al paragone tra un'applicazione basata su \mcs e una
+shell di sistema, facciamo notare che anche in questo caso abbiamo
+bisogno di directory di lavoro, per i programmi utente, per i
+programmi dell'amministratore, ecc... L'elenco seguente riporta i nomi
+che devono essere assegnati a tali directory che vanno create sotto
+\verb|APPD|:
+\begin{itemize}
+\item \verb|adm/scr|: eseguibili per l'amministratore;
+\item \verb|adm/sql|: script SQL per l'amministratore;
+\item \verb|input|: file per il caricamento dei dati nel database;
+\item \verb|log|: contiene i file di log
+\item \verb|usr/scr|: eseguibili per gli utenti;
+\item \verb|usr/sql|: script SQL per gli utenti;
+\item \verb|work|: work directory degli utenti
+\end{itemize}
+%
+Esiste gi\`a una struttura di directory pronta nella directory
+\verb|sharedir/env| che pu\`o essere copiata direttamente in
+\verb|APPD|.
+
+\subsection{Aggiunta di utenti}
+Per permettere agli utenti di accedere al sistema informativo bisogna
+inserirli come utenti MySQL, per cui si rimanda alla documentazione
+relativa per questo aspetto. \`E importante che agli utenti registrati
+sia data l'opportunit\`a di accedere soltanto dall'indirizzo IP
+dell'host su cui viene eseguito l'application server, soltanto al
+database legato all'applicazione, e di non poter modificare le tabelle
+\verb|grants| e \verb|settings|. Quindi bisogna inserire un record
+nella tabella \verb|grants|, come descritto di seguito, nell'ipotesi
+che l'utente si chiami \verb|newuser| e che si vogliano dare tutt i
+permessi tranne quelli di \verb|SYS| e \verb|ADMIN|:
+
+\begin{verbatim}
+insert into grants values (NULL, 'user', 127);
+\end{verbatim}
+
+
+\section{Descrizione del codice sorgente}
+L'application server \mcs \`e un server TCP scritto in C++ con
+differenti caratteristiche quali le capacit\`a di: comunicare con un
+server di database, interagire con programmi esterni tramite riga di
+command e standard output, rispondere a comandi mnemonici inviati
+dall'utente con un protocollo di comunicazione semplice ma non
+limitato, ecc... Per creare una nuova applicazione bisogner\`a
+comunque scrivere del codice specifico, prima di dedicarci
+all'adattamento di \mcs \`e per\`o conveniente familiarizzare
+con il codice sorgente di \mcs stesso, in particolare sulle
+classi ed i metodi utilizzati. Di seguito verr\`a fornita una breve
+descrizione della gerarchia di classi, ma per uno studio pi\`u attento
+rimandiamo alla documentazione tecnica presente in
+\verb|sharedir/doc/html|.
+
+\subsection{File sorgente}
+Segue una breve descrizione dei singoli file sorgente presenti nella
+distribuzione ed il loro utilizzo:
+\begin{itemize}
+\item \verb|mcs.hh|: contiene le definizioni delle classi e costanti
+  necessarie al funzioanmento del server. Questo \`e il file che va
+  incluso nei programmi utente;
+\item \verb|MCS*.cc|: questi file contengono il codice sorgente che
+  imeplementa le classi;
+\item \verb|mcs_globals.hh|: contiene le dichiarazione delle variabili
+  globali;
+\item \verb|mcs_switch.h|: contiene gli switch che abilitano o meno
+  alcune funzionalit\`a nel server;
+\item \verb|mcs_user.hh|: contiene l'implementazione delle funzioni
+  \verb|MCS_NewClientThread| e \verb|MCS_NewRootThread|, richiamate
+  dalla classe \verb|MCSServer| per creare i thread client e root
+  rispettivamente.
+\end{itemize}
+
+
+\subsection{I Thread e le classi}
+Questo software fa largo uso dei thread. I thread sono essenzialmente
+diverse copie dello stesso software che girano come un unico
+processo. Questo significa che una volta lanciato il programma
+verranno generati altri sotto programmi che lavoreranno in
+parallelo. Un esempio semplice riguarda i thread per servire gli
+utenti: ogni volta che un nuovo utente si collega verr\`a generato un
+nuovo thread e ad esso verr\`a affidata la gestione della
+comunicazione con il nuovo utente, mentre i restanti thread possono
+occuparsi degli altri utenti o di altro ancora. Facciamo notare che
+senza il multithreading un programma del genere sarebbe stato molto
+pi\`u difficile da implementare.
+%
+Per sfruttare il multithreading viene utilizzata la classe
+\verb|Thread| della libreria \verb|CommonC++|, essa si occupa di
+creare un nuovo thread quando richiesto e gestisce la chiamata dei
+suoi metodi. Il metodo pi\`u importante della classe \verb|Thread| \`e
+\verb|run()| ovvero il corpo dell'esecuzione del thread. Non appena il
+thread viene creato esso comincia automaticamente ad eseguire il
+metodo \verb|run()|, e si autodistrugge appena tale metodo
+ritorna. Esiste ovviamente anche la possibilit\`a di terminare il
+thread da parte dell'amministratore del sistema.
+%
+Esistono quattro tipi diversi di classi che derivano da \verb|Thread|,
+alcune di esse vengono utilizzate come classi base per
+l'implementazione di classi pi\`u specializzate, altre vengano
+utilizzate per istanziare oggetti che girano in thread separati:
+\begin{enumerate}
+\item \verb|MCSThread|: questa classe non viene mai utilizzata come
+  thread, ma soltanto come base per generare classi pi\`u
+  specifiche. Essa implementa il meccanismo di log e tracciamento
+  degli errori utilizzato nelle classi derivate. Tutte le classi
+  descritte di seguito derivano infatti da questa che a sua volta
+  deriva dalla classe \verb|Thread|. Nota che questa classe non
+  implementa il metodo virtuale \verb|run()|, che deve quindi essere
+  implementato in una classe derivata;
+\item \verb|MCSCLient|: questa \`e la classe base che si occupa di
+  gestire la comunicazione con gli utenti. In questo caso abbiamo
+  implementato il metodo \verb|run()| come un ciclo che legge dal
+  socket i comandi inviati dall'utente, li elabora e quindi invia una
+  risposta. Il ciclo termina quando il client invia un command di
+  \verb|bye|. Per creare una nuova applicazione bisogna derivare
+  questa classe e, sfruttando gli hook (vedi Sez. \ref{ssec:hook}) o i
+  metodi virtuali personalizzare il suo funzionamento.
+\item \verb|MCSRoot|: si tratta di una classe che deriva da
+  \verb|MCSCLient|, viene utilizzato per le operazioni locali che sono
+  indipendenti dalle richieste degli utenti. Un tipico esempio di
+  utilizzo di questa classe \`e il caricamento di dati nel database e
+  la manutenzione ed elaborazione degli stessi. Anche in questo caso
+  per la personalizzazione dell'applicazione bisogner\`a derivare tale
+  classe sfruttando i suoi hook o i metodi virtuali.
+\item \verb|MCSServer|: questa classe si occupa di gestire il socket
+  che accetta le richieste di connessione verso l'esterno. Quando un
+  nuovo utente tenta di collegarsi al sistema esso genera un nuovo
+  client thread ed assegna ad esso la gestione della nuova
+  connessione. Alla creazione dell'oggetto \verb|MCSServer| viene
+  automaticamente creato un root thread. Quando il thread
+  \verb|MCSServer| termina si occupa prima di distruggere tutti i
+  thread precedentemente generati. Per generare i client thread e root
+  thread questa classe utilizza le routine \verb|MCS_NewClientThread|
+  e \verb|MCS_NewRootThread|. Tali routine sfruttano due simboli
+  (\verb|MCS_USERCLASS| e \verb|MCS_ROOTCLASS|) che
+  devono essere definiti dall'utente ed indicano quali classi usare
+  rispettivamente per i thread client e root.
+\end{enumerate}
+%
+Per meglio comprendere le sezioni successive dedicate agli hook e gli
+esempi riportiamo di seguito la descrizione di alcuni metodi della
+classe \verb|MCSClient|:
+\begin{enumerate}
+\item \verb|Send|: utilizzato per inviare un messaggio all'utente e
+  contemporaneamente effettuare il log dello stesso. Nota che il primo
+  parametro deve seguire la convenzione dei valori di ritorno
+  (descritta nella Sez. \ref{ssvalrit}), mentre gli altri seguono la
+  convenzione di chiamate tipo \verb|printf|, ovvero una stringa di
+  formato e le eventuali variabili;
+\item \verb|Log|: utilizzato per effettuare il log di un
+  messaggio. Nota che il primo parametro deve seguire la convenzione
+  dei valori di ritorno (descritta pi\`u avanti), mentre gli altri
+  seguono la convenzione di chiamate tipo \verb|printf|, ovvero una
+  stringa di formato e le eventuali variabili.
+\item \verb|run|: questo \`e il metodo che viene richiamato come corpo
+  del thread, \`e strutturato come un ciclo che legge dal socket di
+  comunicazione una riga di command, lo esegue tramite la chiamata al
+  metodo \verb|exec|, quindi se il command non \`e \verb|bye| invia un
+  prompt all'utente ed attende il nuovo command;
+\item \verb|exec|: questo metodo \`e il vero interprete dei comandi
+  dell'utente. Esso accetta come parametro una stringa contenente il
+  command, e tenta di interpretarlo nelle sue tre componenti (switch,
+  command, parametri, vedi pi\`u avanti). Una volta identificato il
+  command lo esegue con i parametri forniti e restituisce una risposta
+  al client, quindi il metodo ritorna. Prima di iniziare
+  l'interpretazione dei comandi richiama il metodo \verb|custom_exec|
+  passando la stringa di command, cosicch\`e si possa modificare il
+  comportamento del server creando nuovi comandi;
+\item \verb|send_file|: con questo metodo \`e possibile inviare un
+  file all'utente specificando il suo percorso;
+\item \verb|send_queryres|: con questo metodo \`e possibile inviare
+  all'utente il risultato di una query su database;
+\end{enumerate}
+%
+Per ulteriori informazioni riferirsi alla documentazione tecnica.
+
+
+\subsection{Altre classi}
+Qui descriviamo le altre classi utilizzate nel software che non hanno
+la funzionalit\`a dei thread.
+\begin{enumerate}
+\item \verb|MCSEnv|: questa classe viene utilizzata per leggere le
+  informazioni di ambiente dal database, e fornirle ai thread che le
+  richiedono, sollevando questi ultimi dal dover gestire questo
+  accesso al database;
+\item \verb|MCSHandleCmd|: si occupa di gestire le stringhe di
+  command, in particolare viene usata per interpretare i comandi ed i
+  parametri forniti;
+\item \verb|MCSDB|: usata per collegarsi al database MySQL, effettuare
+  query e leggere i risultati. Modificando questa classe \`e possibile
+  accedere ad altri tipi di database e mantenere le stesse
+  funzionalit\`a dell'application server, purch\`e si mantenga la
+  stessa interfaccia;
+\end{enumerate}
+
+\subsection{Convenzione sui valori di ritorno}\label{ssvalrit}
+I valori di ritorno dei metodi \verb|exec|, \verb|send_file|, ecc... e
+deglki hook seguono una stessa convenzione che \`e quella di ritornare
+un valore di tipo \verb|MCSRet|. Si tratta di una enumerazione con i
+seguenti simboli:
+\begin{enumerate}
+\item \verb|OK  |: la routine  \`e stato eseguita con successo;
+\item \verb|IERR|: la routine ha generato un errore ignorabile;
+\item \verb|EERR|: la routine ha generato un errore grave;
+\item \verb|KERR|: la routine ha generato un errore grave, ed il
+  thread deve essere distrutto;
+\end{enumerate}
+%
+Poich\`e l'esecuzione di qualunque command richiede che venga
+successivamente chiamato il metodo \verb|Send| o \verb|Log| (si
+ricorda che \verb|Send| chiama \verb|Log| al suo interno), tale valore
+di ritorno deve anche essere usato come primo parametro per questa
+chiamata.
+
+
+\section{Adattamento di MCS}
+L'adattamento di \mcs consiste nella personalizzazione del
+funzionamento per l'applicazione che si vuole creare. Per far questo
+bisogna derivare le classi che si occupano dei thread utenti e del
+root thread, ovvero: \verb|MCSClient| e \verb|MCSRoot|, ed
+implementare uno o pi\`u metodi virtuali o ``hooks'' (descritti nella
+Sez. \ref{ssec:hook}). Bisogna ora definire i simboli
+\verb|MCS_USERCLASS| e \verb|MCS_ROOTCLASS| con i nomi delle classi
+che gestiranno rispettivamente i client e root threads, ed includere
+il file \verb|mcs_user.hh|. Quindi bisogna istanziare un oggetto di
+tipo \verb|MCSEnv| e specificare tutte le impostazioni necessarie
+all'esecuzione del server. Infine bisogna istanziare un oggetto di
+tipo \verb|MCSServer| passando al costruttore il riferimento
+all'oggetto di tipo \verb|MCSEnv|.
+
+\subsection{Gli ``hook''}\label{ssec:hook}
+Derivando una classe \`e possibile aggiungere funzionalit\`a sotto
+forma di metodi, oppure re-implementare quelli gi\`a esistenti. Nel
+caso della classe \verb|MCSClient|, che si occupa di gestire le
+sessioni utente, noi vogliamo aggiungere nuovi metodi ma vogliamo
+anche interagire con quelli esistenti, poich\`e tutta le gestione di
+una sessione si riduce ad un ciclo che legge da un socket (nel metodo
+\verb|run|) e ad una chiamata al metodo \verb|exec| per eseguire il
+command. Per questo motivo sono stati previsti specifici metodi
+virtuali ``hook'' che nella implementazione di \mcs sono
+semplicemente vuoti. Ma la chiamata a questi metodi si trova
+all'interno del codice \mcs, quindi nel caso in cui questi
+vengano implementati in una classe derivata essi verranno richiamati
+al momento giusto. La classe \verb|MCSClient| presenta i seguenti
+hook:
+\begin{itemize}
+\item \verb|MCSRet hk_connect()|: richiamato all'inizio del metodo
+  \verb|run| ma prima che inizi il ciclo di lettura dal
+  socket. Tramite questo metodo l'utente pu\`o istanziare eventuali
+  oggetti necessari, oppure rifiutare la connessione ritornando un
+  valore di errore. In tal caso \`e opportuno scrivere un messaggio di
+  errore tramite il metodo \verb|Send| oppure \verb|Log|. Se la
+  connessione \`e accettata bisogna ritornare il valore \verb|OK|;
+
+\item \verb|MCSRet hk_exec(string& cmd, bool& cmd_executed)|: questo
+  metodo viene richiamato all'interno del metodo \verb|exec| subito
+  dopo l'analisi degli switch ma prima dell'analisi dei
+  comandi. Se si vogliono aggiungere nuovi comandi a quelli di base
+  bisogna implementare questo metodo. Il flag \verb|cmd_executed|
+  viene utilizzato dal metodo \verb|exec| per sapere se il command \`e
+  stato eseguito all'interno di \verb|hk_exec| o meno;
+
+\item \verb|void hk_disconnect()|: questo metodo viene richiamato
+  quando il metodo \verb|run| sta per terminare, conseguentemente al
+  command di chiusura sessione da parte dell'utente. Per liberare
+  memoria allocata \`e meglio utilizzare il distruttore della classe
+  derivata.
+\end{itemize}
+%
+Per la classe \verb|MCSRoot| al momento non \`e previsto alcun hook
+poch\`e solitamente si deve implementare il metodo \verb|run| nella
+classe derivata.
+
+\subsection{Scrittura del codice}
+In questa sezione riportiamo un esempio minimale di codice necessario
+affinch\`e sia possibile creare una applicazione:
+
+\begin{verbatim}
+#include <mcs.hh>
+
+//Derive a new client class
+class myClient : public MCSClient
+{
+public:
+  //empty constructor and destructor
+  myClient(int lID, TCPSocket* server) : MCSClient(lID, server) {}
+  ~myClient() {}
+
+  //Hooking every received commands
+  MCSRet hk_exec(string& cmd, bool& cmd_executed)
+  {
+    ...
+    return OK;
+  }
+};
+
+//Mandatory specification of which class we want to use as client and
+//root thread
+#define MCS_USERCLASS myClient
+#define MCS_ROOTCLASS MCSRoot
+#include <mcs_user.hh>
+
+
+int main(int argc, char *argv[]) {
+  //Create an environment with all switches set to false, then set
+  //some properties
+  MCSEnv* env=new MCSEnv(MCSEnv_SW_FALSE);
+  env->appname="echosrv"; //--MANDATORY--
+  env->port=9876;         //server will listen on port 9876
+  env->cl_logstdout=true; //we want the log on stdout
+
+  //Create a new server, note that we passed the environment reference
+  //as paramter
+  MCSServer* mcssrv=new MCSServer(env);
+  mcssrv->start();   //...and start it
+
+  //Wait for the server to terminate
+  while (mcssrv->isRunning())
+    Thread::sleep(500);
+
+  delete env;
+}
+\end{verbatim}
+%
+Come si vede da questo codice minimale bisogna includere alcuni file
+di \mcs, quindi, dopo aver derivato la classe \verb|MCSClient| e
+definito i simboli \verb|MCS_USERCLASS| e \verb|MCS_ROOTCLASS|,
+istanziare un oggetto di tipo \verb|MCSEnv|, settare almeno i campi
+necessari (per una descrizione di questi ed altri campi vedi
+Sez. \ref{sec:MCSEnv_fields}), ed infine istanziare l'oggetto di tipo
+\verb|MCSServer| passando il riferimento all'oggetto
+\verb|MCSEnv|. Quindi il programma attende finch\`e il server non
+termina ed infine libera la memoria allocata. Il programma main
+avrebbe anche potuto terminare il server con l'istruzione:
+
+\bigskip
+\verb|delete mcssrv;|
+\bigskip\newline
+%
+Per altri esempi pi\`u completi riferirsi alla sezione degli esempi.
+
+
+\subsection{Compilazione}
+Durante l'installzione di \mcs viene copiato lo script
+\verb|mcs-config| che fornisce le opzioni necessarie per compilare le
+applicazioni utente. Se il programma utente si chiama \verb|prog.cc|
+allora i comandi necessari per compilare e linkare le librerie sono i
+seguenti:
+
+\bigskip
+\verb|g++ `mcs-config --cflags` -c prog.cc|
+
+\verb|g++ -o prog prog.o `mcs-config --libs`|
+\bigskip
+
+
+\section{La classe MCSEnv}\label{sec:MCSEnv_fields}
+Tale classe mantiene diverse informazioni relative al funzionamento
+del server \mcs. Essa va istanziata, nella sua forma base o
+derivata, prima di \verb|MCSServer|, quindi bisogna valorizzare i
+campi necessari descritti pi\`u avanti, ed infine utilizzarla come
+parametro per la costruzione di \verb|MCSServer|. I campi obbligatori
+sono:
+\begin{itemize}
+\item \verb|glpath|: percorso completo di \verb|APPD|;
+\item \verb|appname|: nome dell'applicazione;
+\item \verb|appvers|: versione dell'applicazione;
+\end{itemize}
+%
+Se inoltre il flags \verb|cl_have_db| \`e impostato a true bisogna
+anche impostare i seguenti:
+\begin{itemize}
+\item \verb|db_user|: nome utente con il quale il root thread tenta
+  l'accesso al DB;
+\item \verb|db_pass|: password con la quale il root thread tenta
+  l'accesso al DB;
+\item \verb|db_name|: nome del database a cui accede il root thread;
+\end{itemize}
+%
+Il costruttore della classe \verb|MCSEnv| necessita come parametro di
+uno dei simboli \verb|MCSEnv_SW_FALSE| o \verb|MCSEnv_SW_DEFAULT| con
+i quali tutti i restanti campi booleani ricevono un valore,
+rispettivamente, falso o di default. Qui di seguito riportiamo
+l'elenco ed il significato di tali campi, fra parentesi il loro valore
+di default:
+
+\begin{itemize}
+\item \verb|cl_have_db|: indica se le funzionalit\`a del database
+  debbano essere attivate o meno (true);
+\item \verb|cl_verbose| (false): rende il server molto pi\`u prolisso per
+  quanto riguarda il log. Questo switch \`e utile durante lo sviluppo
+  per evidenziare eventuali problemi;
+\item \verb|cl_netquiet| (false): se impostato a true vengono abolite
+  tutte le risposte descrittive inviate ai client, verranno inviati
+  soltanto i codici di risposta, i campi numerici e gli errori. Se il
+  software del client rispetta fedelmente il protocollo di
+  comunicazione sar\`a in grado di funzionare ugualmente in questo
+  caso;
+\item \verb|cl_logfile| (false): specifica se utilizzare o meno il log
+  file;
+\item \verb|cl_logstdout| (false): specifica se scrivere il log anche
+  su stdout;
+\item \verb|cl_rootlogin| (false): specifica se il root thread
+  tenter\`a l'accesso al database;
+\item \verb|cl_clean_logout| (false): specifica se quando l'utente
+  effettua il logout la sua work directory va cancellata;
+\item \verb|cl_autoexec| (false): specifica se quando un utente accede
+  verr\`a automaticamente eseguito il command \verb|bat auto|;
+\item \verb|cl_work| (true): specifica se verr\`a creata la work
+  directory per l'utente quando questo si collega;
+\item \verb|cl_local_scripts| (true): specifica se verr\`anno definiti i
+  comandi \verb|SCR| e \verb|BAT| per l'utilizzo di script;
+\end{itemize}
+
+
+
+\section{Descrizione formato del log}
+Il log generato dall'application server fornisce una serie di
+informazioni utili ad effettuare controlli di debug, di sicurezza,
+statistiche ecc... sulle operazioni effettuate dagli utenti. Il log
+pu\`o avvenire su stdout e/o su file, a seconda delle
+impostazioni. Ogni riga rappresenta una azione compiuta
+dall'application server. I vari campi indicano l'anno, il mese, il
+giorno, l'ora, i minuti ed i secondi in cui avviene
+l'operazione. Quindi troviamo un numero progressivo univoco (modulo
+1000000) utile per avere l'esatta sequenza delle operazioni,
+l'indicazione del thread che ha effettuato l'operazione ed un
+messaggio descrittivo. Le sigle dei thread che possono registrare una
+azione nel log sono le seguenti:
+\begin{itemize}
+\item \verb|SSS|: \verb|MCSServer| thread (ovvero il thread principale
+  che si occupa di ascoltare le richieste di connessione sul socket e
+  generare nuovi thread non appena queste arrivano);
+\item \verb|000|: \verb|MCSRoot| thread (ovvero il thread che provvede
+  alle operazioni locali, indipendenti dall'attivit\`a dei client);
+\item \verb|001| - \verb|100|: \verb|MCSClient| thread (ovvero i
+  client che si occupano di ascoltare le richieste degli utenti e di
+  soddisfarle). Il numero indica il Client identifier;
+\end{itemize}
+
+Ulteriori informazioni si possono trovare nel campo successivo. Questo
+campo infatti, oltre a contenere un messaggio descrittivo dell'azione
+pu\'o contenere sequenze di caratteri con significati particolari:
+\begin{itemize}
+\item \verb|< |: Command ricevuto dal client;
+\item \verb|# |: Risposta inviata al client;
+\item \verb|[at MCSClient.cc:573 (warn)]: #100Syntax error: aaaa| : \'E
+  avvenuto un errore ignorabile nel file sorgente \verb|MCSClient.cc| alla
+  riga 573;
+\end{itemize}
+
+Per quest'ultimo tipo di messaggio descrittivo gli errori possono
+essere di tre tipi:
+\begin{itemize}
+\item \verb|(warn)|: \`e avvenuto un errore non grave;
+\item \verb|(error)|: \`e avvenuto un errore grave;
+\item \verb|(kill)|: \`e avvenuto un errore grave ed il thread che lo
+  ha generato sar\`a distrutto;
+\end{itemize}
+
+\bigskip
+
+Segue un esempio di log:
+\footnotesize
+\begin{verbatim}
+
+
+My Customizable Server (MCS) ver. 0.0.2
+
+
+YYYYMMDD HHMMSS ID-Log thr MESSAGE
+-------- ------ ------ --- -----------------------------------------------------
+20040729 163010 000001 MMM APPD set to: /home/gcalderone
+20040729 163010 000002 MMM MCSServer                            created
+20040729 163010 000003 MMM Creating new MCSRoot...
+20040729 163010 000004 000 MCSClient                            created
+20040729 163010 000005 MMM MCS Server running on port 6523
+20040729 163017 000006 MMM Creating new MCSClient on ID=1...
+20040729 163017 000007 001 MCSClient                            created
+20040729 163017 000008 001 #001Welcome at glinux.local running calculator ver. 1.0
+20040729 163020 000009 001 < cid
+20040729 163020 000010 001 #015|1| (Client ID)
+20040729 163022 000011 001 < aaa
+20040729 163022 000012 001 [at MCSClient.cc:573 (warn)]: #100Syntax error: aaa
+20040729 163024 000013 001 #099Bye.
+20040729 163024 000014 001 MCSClient                            destroyed
+Signal 2 received
+20040729 163025 000015 MMM Killing root thread...
+20040729 163025 000016 000 MCSClient                            destroyed
+20040729 163025 000017 MMM Killing all clients...
+20040729 163025 000018 MMM MCSServer                            destroyed
+\end{verbatim}
+
+
+\section{Linee guida per la scrittura di shell script}
+I shell script sono normali programmi per la shell, che vengono
+eseguiti in seguito ad una richiesta del client con il command
+\verb|SCR|. Devono essere memorizzati nella directory
+\verb|APPD/usr/scr| se sono destinati agli utenti, nella directory
+\verb|APPD/adm/scr| se destinati all'amministratore di sistema.  Gli
+shell script devono utilizzare i parametri della riga di command come
+ingresso (non devono mai leggere da standard input altrimenti viene
+bloccata l'esecuzione del thread), e lo standard output come
+uscita. Inoltre devono sempre tornare un codice di uscita uguale a
+zero, in caso di esecuzione corretta, o diverso da zero se \`e
+avvenuto un errore, in tal caso \`e consigliabile scrivere un
+messaggio indicativo su standard error. \`E utile tenere presente, per
+evitare problemi di sicurezza, che gli script vengono eseguiti con i
+diritti dell'utente \verb|SYS_USER|.
+
+\section{Linee guida per la scrittura di SQL script e batch script}
+I SQL script sono un elenco di istruzioni SQL che verranno eseguite
+una dopo l'altra, in risposta al command \verb|SQL|. Tali file devono
+essere memorizzati nella directory \verb|APPD/usr/sql| se sono
+destinati agli utenti, nella directory \verb|APPD/adm/sql| se
+destinati all'amministratore di sistema. Le istruzioni che compongono
+gli script sono separate dal carattere punto e virgola, possono quindi
+essere scritte su pi\`u righe. Se anche una sola di esse provoca un
+errore l'esecuzione dello script verr\'a interrotta. I SQL script
+dispongono anche di un meccanismo di sostituzione dei parametri, \'e
+possibile infatti utilizzare le stringhe \verb|$1|, \verb|$2|, ecc...,
+per riferirsi rispettivamente al primo, secondo parametro, ecc...
+passati al command \verb|SQL| dopo l'indicazione del nome dello
+script. Per quanto riguarda i batch script valgono esattamente le
+stesse considerazioni, soltanto che in questo caso le singole
+istruzioni sono comandi \mcs. Anche in questo caso si possono
+utilizzare i parametri per la sostituzione. \`E consigliabile non
+eseguire comandi \verb|BAT| all'interno di batch script.
+
+
+
+
+
+
+\chapter{Examples}
+In questo capitolo presentiamo alcuni semplici esempi allo scopo di
+rendere pi\`u chiaro l'utilizzo delle classi fornite da
+\mcs. Per un esempio pi\`u complesso si veda la documentazione
+relativa a \verb|SDAMS|. Per collegarsi ai server mostrati nei
+seguenti esempi basta utilizzare un semplice client telnet con il
+seguente command:
+
+\bigskip
+\verb|telnet localhost <PORT>|
+\bigskip\newline
+%
+Dove \verb|<PORT>| va sostituito con il numero di porta utilizzato.
+
+
+\section{Un semplice echo server}
+L'esempio pi\`u semplice da cui partire per dimostrare come funziona
+un server \`e un cosiddetto echo server, ovvero un programma che
+risponde con la string a che abbiamo inviato. Tale esempio viene
+installato nella directory degli esempi. Si noti che abbiamo indicato
+tutte quelle porzioni di codice che sono obbligatorie. Segue il codice
+sorgente: \newline
+%
+\footnotesize
+\input{../share/examples/echosrv.cc}
+\normalsize
+%
+L'analisi di questo codice \`e abbastanza intuituiva per coloro i
+quali hanno letto i capitoli precedenti. Per compilare questo
+programma basta eseguire il programma \verb|make|, il cui
+\verb|Makefile| si trova nella stessa directory dell'esempio. Per
+eseguirlo basta dare il command con il nome dell'eseguibile. Si noti
+che non \`e necessario creare alcuna struttura di directory o tabella
+di database.
+
+\section{Un calcolatore, comandi personalizzati}
+In questo esempio vediamo come sia possibile creare comandi utente
+personalizzati sfruttando l'hook \verb|hk_exec|. A tale scopo viene
+utilizzato il metodo \verb|chk| della classe \verb|MCSHandleCmd|. Un
+altro importante concetto mostrato qui \`e la gestione dei segnali,
+attraverso le routine \verb|set_signal| e \verb|handle_signal|. Tale
+gestione si rende necessaria per evitare che a causa di una
+interruzione il server venga chiuso senza aver prima liberato tutte le
+risorse utilizzate. Segue il codice sorgente: \newline
+%
+\footnotesize
+\input{../share/examples/calculator.cc}
+\normalsize
+%
+
+\section{Una agenda dei contatti: accesso al database}
+In questo esempio mostriamo come sia semplice creare una agenda dei
+contatti minimale. Vengono definiti due nuovi comandi: \verb|ins| e
+\verb|search|. Con il primo si inizia la sequenza di inserimento di un
+nuovo contatto e verranno richieste le singole informazioni. Con il
+secondo, che prevede un parametro alfanumerico, verr\`a cercato un
+contatto il cui cognome contiene il parametro dato. Nel caso in cui
+uno o pi\`u contatti venissero trovati, verranno inviate tutte le
+informazioni relative al client. Notiamo che in questo esempio, oltre
+a derivare la classe \verb|MCSClient|, deriviamo anche la
+\verb|MCSRoot| per far s\`i che la prima volta che il programma viene
+eseguito vengano creati il database e la tabella necessari. Affinch\`e
+il programma funzioni correttamente \`e necessario inserire il nome
+utente e la password di un utente MySQL esistente, nel codice di
+\verb|addrbook.cc|. Segue il codice sorgente: \newline
+%
+\footnotesize
+\input{../share/examples/addrbook.cc}
+\normalsize
+%
+
+\section{Esempio di utilizzo di programmi esterni}
+
+\section{Punto di partenza per una nuova applicazione}
+Per scrivere una nuova applicazione \`e sempre conveniente utilizzare
+lo script \verb|mcs_newapp|. Per quanto riguarda il codice sorgente,
+tale script copia il file \verb|mcstest.cc| presente in
+\verb|sharedir/examples/mcstest|, che rappresenta un buon punto di
+partenza per la scrittura di una nuova applicazione poich\`e esso
+presenta gi\`a lo scheletro per la derivazione delle classi
+\verb|MCSClient| e \verb|MCSRoot|, nonch\`e la definizione dei simboli
+necessari, la gestione dei segnali di sistema, la gestione delle
+opzioni della riga di command per l'attivazione dei singoli switch di
+\verb|MCSEnv| e  la creazione degli oggetti necessari. Qualunque
+applicazione dovrebbe seguire questo modello, eventualmente eliminando
+ci\`o che non serve.

@@ -1,0 +1,6 @@
+<map id="mcs::BaseThread" name="mcs::BaseThread">
+<area shape="rect" id="node3" href="$classmcs_1_1LocalThread.html" title="Server side administrative thread. " alt="" coords="5,155,107,181"/>
+<area shape="rect" id="node4" href="$classmcs_1_1Server.html" title="Main server class for a MCS&#45;based application. " alt="" coords="131,155,207,181"/>
+<area shape="rect" id="node5" href="$classmcs_1_1UserThread.html" title="The server side client thread. " alt="" coords="232,155,331,181"/>
+<area shape="rect" id="node2" href="$classmcs_1_1Thread.html" title="A class to create separate threads. " alt="" coords="131,5,208,32"/>
+</map>

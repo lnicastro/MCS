@@ -1,0 +1,24 @@
+#SQL
+
+#Drop temporary table if it exists
+DROP TABLE IF EXISTS _tmp_;
+
+#Create a new table with field $2 of table $1
+CREATE TABLE _tmp_ AS 
+  SELECT $2 FROM $1
+;
+
+
+#Add a field that will contain the length of the data 
+# stored in the field.
+ALTER TABLE _tmp_
+  ADD COLUMN len INT UNSIGNED;
+
+
+#Fill the new table with lengths
+UPDATE _tmp_ SET len = length($2);
+
+SELECT $1.*, _tmp_.len
+       FROM $1 LEFT JOIN _tmp_
+       ON $1.$2 = _tmp_.$2
+;

@@ -1,0 +1,9 @@
+<map id="mcs::Synchro" name="mcs::Synchro">
+<area shape="rect" id="node2" href="$classmcs_1_1Dynamic__Array.html" title="mcs::Dynamic_Array\l\&lt; int \&gt;" alt="" coords="377,5,492,47"/>
+<area shape="rect" id="node3" href="$classmcs_1_1Dynamic__Array.html" title="mcs::Dynamic_Array\l\&lt; mcs::Data \&gt;" alt="" coords="377,83,492,124"/>
+<area shape="rect" id="node4" href="$classmcs_1_1Dynamic__Array.html" title="mcs::Dynamic_Array\l\&lt; mcs::Record \&gt;" alt="" coords="377,171,492,212"/>
+<area shape="rect" id="node5" href="$classmcs_1_1Dynamic__Array.html" title="A thread safe, template class to handle an array of objects. " alt="" coords="137,73,252,115"/>
+<area shape="rect" id="node6" href="$classmcs_1_1Record.html" title="A dynamic array of Data objects. " alt="" coords="155,258,234,285"/>
+<area shape="rect" id="node7" href="$classmcs_1_1ClientInfo.html" title="Class holding information about a client connection. " alt="" coords="391,249,479,275"/>
+<area shape="rect" id="node8" href="$classmcs_1_1FITSWriter.html" title="Write a fits file. " alt="" coords="387,299,482,326"/>
+</map>

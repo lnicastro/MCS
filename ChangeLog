@@ -1,0 +1,600 @@
+2018-05-28  Luciano Nicastro <nicastro@iasfbo.inaf.it>, ver. 0.3.3-alpha6
+	- Improved performance in data import. See Query::prepare_with_parameters();
+	- Fixed IDL interface for new strucure definition in "idl_export.h".
+
+2014-12-12  Luciano Nicastro <nicastro@iasfbo.inaf.it>, ver. 0.3.3-alpha6
+	- Added TLOGICAL fits data type;
+	- Set curl as an optional package (added --enable-curl);
+	- specify mcs namespace for stoi function in Data.cc (mcs::stoi);
+	- extend functionalities for the demo program fits2dbt (in share/examples).
+
+2012-12-24  P.G. Sprimont & Luciano Nicastro <nicastro@iasfbo.inaf.it>, ver. 0.3.3-alpha5
+	- gcc 4.7 support
+	- Added contrib subdir
+	- Added json support in FITS reader
+	- Fix for idl2mcs in case of lib64 directory present
+	- Minor fixes
+
+2012-12-18  Luciano Nicastro <nicastro@iasfbo.inaf.it>, ver. 0.3.3-alpha4
+	- Some initial revision to allow program linking under gcc 4.7.
+	- Minor bug fixes.
+
+2012-12-15  Luciano Nicastro <nicastro@iasfbo.inaf.it>, ver. 0.3.3-alpha4
+	- Mac OS X + MacPorts support with Fortran interface working!
+
+2012-12-10  Luciano Nicastro <nicastro@iasfbo.inaf.it>, ver. 0.3.3-alpha4
+	- Mac OS X + MacPorts support. Fortran interface not working yet!
+
+2011-06-05  Luciano Nicastro <nicastro@iasfbo.inaf.it>, ver. 0.3.3-alpha3
+	- Fixed a random double free corruption in Serializable class.
+
+2011-05-12  Luciano Nicastro <nicastro@iasfbo.inaf.it> & GC, ver. 0.3.3-alpha3
+	- gcc 4.4.4 required: Added -P option to compile mcs_fortran.c
+	- various system dependent include checks
+
+2011-03-07  Luciano Nicastro <nicastro@iasfbo.inaf.it> & GC, ver. 0.3.3-alpha3
+	- Fixed DATETIME fields management;
+	- Various fixes to support the new gcc 4.4.x compiler;
+	- fixed Data string to double conversion;
+	- Added method "Types2MYSQLStr" to the class Data;
+	- Added test/demo main program "fits2dbt" (in dir. share/examples)
+	  useful to trasfer a FITS binary table into a DB table;
+	- Added methos "ffile_is_compressed" to the class FITSReader;
+	- Minor fixes.
+
+2008-07-28  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.3.3-alpha2
+	- The methods to handle "long long int" and "unsigned long long
+	int" values are now available to external programming languages;
+
+2008-06-07  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.3.3-alpha1
+	- A new class is provided to handle datetime information: DateTime;
+	- A new program is provided to kill a running MCS server: killmcs;
+	- The python2mcs script is no longer needed;
+	- The CommandParser class has a new method to parse the standard
+	  argc and argv parameters;
+	- The Query::prepare_with_parameters() allows also REPLACE to be
+	executed (using MCS_PAB_REPLACE).
+
+2007-18-11  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.3.2-alpha1
+	- The MyRO, DIF, and VOTPP facilities development are now
+	separated from the main MCS project.
+
+2007-08-11  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.3.1-alpha1
+	- The Healpix NESTED pixelization scheme is now supported.
+	
+2007-01-09  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.3.0
+	- This release contain the first alpha version of the DIF database
+	engine, which can be compiled using the "--enable-dif" or
+	"--enable-all" option to configure. 
+
+2007-25-06  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.2.9-alpha
+	- New class FITSReader: to read fits file using the RecordSet
+	interface;
+	
+2007-05-06  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.2.8-alpha
+	- Bugfix: when a thread terminates now it really free all its
+	resources.
+
+	- The Query implementation now present field names only in the
+	meta record (accessible through metarec()) instead of in any
+	record.	
+	
+2007-04-03  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.2.7-alpha
+	- User manual updated.
+
+	- The Client constructor has a new parameter to specify a timeout
+	value to be used when waiting a response from the server. Note
+	that this parameter has been added also on the "new_Client"
+	routine in the interfaces for other programming languages.
+
+	- The mcsWait() routine no longer exists.
+
+	- The mcsStart() and mcsCustomStart() now starts the server
+	process in daemon mode.
+
+	- The MCS_CUSTOM_SERVER macro now wants only two arguments: the
+	name of the classes to be used instead of UserThread and
+	LocalThread.
+
+	- The MCS_CUSTOM_FUNCTION macro no longer exists, it has been
+	included in MCS_CUSTOM_SERVER.
+	
+	- Minor fixes in multi-dimensional array handling in Data class.
+	
+2007-02-13  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.2.6
+	- Minor release, this is just to fix some problems when compiling
+	on 64 bit machines.
+
+	- Note that from this version the "swig" package is required to be
+	installed in order to use the "PHP" and "python" interfaces.
+ 
+	
+2006-12-23  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.2.5
+	- New class added: ThreadDetached, it can be used to create
+	threads in detached state (i.e. threads that does not need to
+	notify parents of their termination).
+
+	- New class added: Pipe, to communicate between threads through
+	file I/O primitives, i.e. using system pipes.
+
+	- New class added: URLReader, to read remote files as they were
+	local files.
+
+	- The VOT_Base element had its name changed to the more proper
+	VOT_Element.
+
+	- All VOTable related classes are now define inside a new
+	namespace named "vot", so the prefix "VOT_" has been removed.
+	
+	- Fixed a rounding problem when calling Data::dval()
+
+	- The mcs::Data::*fmt variables (used to hold the format
+	specification for all allowed conversions) are now static private
+	members. Furthermore the formats to handle floating point numbers
+	has changed from "%f" to "%g" (to drop unnecessary zeroes).
+	
+	- A single mcs::Data object can now handle a multidimensional
+	array of base type data. Support for such arrays has been added to
+	handle the corresponding arrays on VOTable files. Methods added
+	are: resize(), resizeVaryingDim(), dim(), howManyDim(),
+	varyingDim(), arraySize(), array() and operator().
+
+	- The base commands TLIST and TINFO now reads information from the
+	"information_schema" database;
+
+	- New method: mcs::Query::last_id, returns the last generated id
+	on an AUTO_INCREMENT column.
+	
+2006-09-04  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.2.4
+	- A new interface for Python is now implemented, as well as the
+	"python2mcs" script to create logical links to necessary files.
+
+	- The IDL interface now comes as a DLM (Dynamic Loadable Module)
+	instead of using CALL_EXTERNAL. This change is due to performance
+	reason. 
+
+	- The protocol specification regarding the transfer of Data object
+	of base type TIME has changed to increase performance and
+	portability. IMPORTANT NOTE: programs using old versions of MCS
+	library won't be compatible with this and next releases.
+
+	- The various interfaces and facilities available with MCS are now
+	disabled by default, and won't be built unless you use the
+	appropriate options to the configure script.
+
+	- The MCS server doesn't automatically create certificate and
+	private key files anymore, instead it throws an error if they are
+	not present. To create them call the mcscreatekey program.
+
+	- The following packages are distributed with MCS: PCRE, CFITSIO,
+	XML2, OPENSSL. If your system is missing one of them (and the
+	corresponding facility is enabled) the configure script will tell
+	you how to install it.
+
+	- It is now possible to specify the size of each binary chunk
+	being sent across the network in the configuration file.
+
+	- The timeout while connecting using the Client class were system
+	dependent, now it use the timeout specified in the configuration
+	file.
+	
+	- The UserThread class has a new method to send data object to
+	other threads inside the server program: send2OtherThreads. The
+	Data object received are in the "recv" Record object.
+
+	- Two new functions have been added: copy and move, to copy and
+	move files.
+	
+	- A new switch can be used in the configuration file:
+	"restartlocal" . If set to 1 it will restart the LocalThread if it
+	dies.
+
+	- Fixed a bug in Data::fval and Data::lval() about unsinged
+	integers. 
+
+	- Fixed a bug in the idl2mcs and php2mcs scripts.
+
+	- Tex documentation updated, example for PHP and IDL added.
+	
+2006-06-25  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.2.3
+	- The SSL protocol is now supported.
+	
+	- Lot of documentation has been rewritten.
+	
+2006-06-05  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.2.2
+	- New classes are available to handle VOTables, the most important
+	are VOT_Parser_Stream to read a VOtable file as a stream, while
+	VOT_Parser_Tree will map a VOtable file into a memory tree.
+
+2006-04-03  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.2.1
+	- The Thread class has a new virtual method: final(), that tuns in
+	the separate thread and is called before the destructor, allow
+	memory cleanup, objects destructions, etc...
+
+	- A new hook method (and the corresponding callback function) is
+	available: Server.hk_newClient(). Called when a new user connects
+	to the server, it works like the ClientThread.hk_connect() method
+	but it is used inside the Server class instead of ClientThread.
+
+	- A new configuration switch is available: Env.cl_createlocal, to
+	eventually disable local thread creation by the server.
+
+	- The ClientThread class had changed its name into the more
+	correct UserThread.
+
+	- The ClientThread name is now used for a new class, derived from
+	the Thread and Client classes, which executes a sepearate thread
+	to handle server's "wake up" requests.
+
+	- The Client class has a new virtual method: event(), called each
+	time the client disconnect from the server, an error occur or some
+	data arrives from the server. This method became very useful when
+	used toghether with the ClientThread class.
+	
+2006-03-08  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.2.0
+	- The BaseThread, ClientThread, and Event contructor have changed
+	because they were too similar. Now an Event object can be created
+	using the macros MCS_OK, MCS_WARN, MCS_ERROR, MCS_FATAL and MCS_.
+
+	- The Data class now support also the type MEDIUM, which is always
+	mapped to an integer, but let you access those database table
+	which have a MEDIUMINT column.
+	
+	- The ThreadFactory is no longer needed, now it is the Server
+	class that user should derive to use the correct customized
+	classes. This task can be easily accomplished by the
+	MCS_CUSTOM_SERVER macro.
+
+	- The mcsmain() function has been substituted with mcsstart and
+	mcswait. These routines can now be used also with customized
+	(derived) classes.
+	
+	- Several minor interfaces changes have been made, so now the
+	interface num ber is 2.0.0.
+
+	- The HTML reference documentation about all classes, functions,
+	etc... is now complete. Several examples have been added.
+
+	- A FORTRAN77 interface is now compiled inside the library.
+	
+2006-02-03  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.1.9
+	- Several class names are changed to reflect a more uniform
+	naming schema. We also created a namespace ("mcs") inside which
+	all classes and functions are defined. So the new schema is as
+	following: 
+
+	- all declarations can be found inside the namespace "mcs";
+
+	- every declaration that can be hide by the namespace has its name
+	changed without any prefix (so for example MyThread became
+	Thread).
+
+	- every declaration that cannot be hide by the namespace
+	(typically macros) has the prefix "MCS_". An exception to this
+	rule are the messages, for which the prefix is "MSG_".
+
+	Furthermore some classes had its name changed due to logical
+	reasons.
+
+	- The Error class, which was used to throw exceptions, had changed
+	its name in "Event". The Event class contains all informations
+	about an "event", that is a command received by a user, a server
+	reply, any information that must be logged, or an error occurred.
+	
+	- The interface version has changed: now is 1.0.0
+	
+	- New options added to configure: --enable-mysql, to enable or
+	disable mysql facilities. This has been provided because sometimes
+	a user needs just the server, and don't want to link against an
+	unused library.
+
+	- The mechanism to execute external scripts and programs, SQL
+	scripts and BATCH files has changed: now all these files can be
+	stored everywhere, the server will know of their availability with
+	an entry in the configuration file. The command to execute these
+	files now is only one: "EXEC", the server will inspect the file to
+	see which type it is, then execute it appropriately. Even new is
+	the fact that every external script or program is executed in the
+	user work directory reather than in the main directory of the
+	server, and has a modified environment with variables that
+	provides the username, password, database name actually used to
+	the spawned process.
+
+	- The server no longer needs all those directories in the tree,
+	only "work" is needed. External scripts and programs are described
+	in the configuration file.
+
+
+2006-01-30  Giorgio Calderone <gcalderone@ifc.inaf.it>, ver. 0.1.8
+	- The configure script now searches for fitsio headers and library
+	in the standard location (/usr/local/cfitsio, and
+	/usr/local/rsi/idl respectively).
+
+	- New options added to configure: --enable-debug,
+	--enable-cfitsio, --enable-idl, --enable-php, to enable or disable
+	(with --disable-*) a feature. Furthermore the options
+	--with-cfitsio=PATH and --with-idl=PATH are available to specify a
+	path.
+
+	- The external library "wvstreams" is not needed anymore, as well
+	as the external code relative to the Regexx class. The only
+	external libraries needed yet are "pcre" and "mysqlclient".
+
+	- Class MySocket has been almost completely rewritten to handle
+	sockets without any external class needed, furthermore we added
+	the following classes: MyNetInterface, MyHostInfo, MyServerSocket.
+
+	- Class MyConf has been almost completely rewritten to handle
+	configuration files without any external class needed.
+	
+	- Class MCSHandleCmd has been modified to use directly the "pcre"
+	library. It also has a new interface that supports argument and
+	option parsing in away very similar to a shell.
+
+	- Class mcscli has a new behaviour: with every call to exec() all
+	internal vectors are cleaned. Furthermore when the client receives
+	an answer with one or more auxiliary fields, these are stored in
+	the mcscli::recv vector as MyData objects.
+
+	- All test programs have been modified to check that every call to
+	the "mcs" library behave correctly. As soon as possible these
+	programs will be merged in a complete test suite, available
+	through the "make test" command.
+	
+2005-11-11  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.1.7
+	- The major changes is the new C interface to MCS. This interface
+	is automatically created by preprocessor macros in the file
+	mcs_c.h. It will be used mainly to simplify interfacing other
+	languages such as php (using swig) and IDL. The interface use a
+	syntax very close to that presented by swig.
+
+	- The php interface (through swig) uses the new C interface
+
+2005-10-30  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.1.6
+	- Class MyQueue has been renamed: MyVector, that's because it can
+	be used as a vector (with operator[], field, mfield), and as a
+	queue (push, pop).
+
+	- Some method in DBQuery has been removed: field(), and
+	mfield(). And two new method has been added: param() (returns a
+	MyVector with parameters), and rec() (returns a MyVector with
+	current record data).
+
+	- Class MyVector can be "packed" just as a MyData object, so it
+	can be trasferred through sockets. Note that definition of
+	prepareBuffer() method has changed in MyVector and MyData
+	classes. A buffer can be "unpacked" into a new MyVector object
+	with the new costructor.
+
+2005-10-13  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.1.5
+	- Some names are changed to be more coherent:
+	DBField  --> MyData
+	DBtypes  --> MyTypes
+	DBTYPE_  --> MY_
+	and a new header file has been added: MyData.hh
+
+	- The size of lmaxLength field in MyData is changed from "unsigned
+	long" to "unsigned short int" so that the buffer will be 2 bytes
+	short during trasmission.
+
+	- Class MySynchro has a new parameter in costructor: isDummy. When
+	it is true the object is a "dummy" object, that is every call
+	return immediately without being synchronized. Class MyQueue also
+	has a new parameter in costructor to handle this feature.
+
+	- Solved a bug concerning the month part of a date time value
+	written in the database.
+
+	- A new mechanism help customize MCS, besides "hook" methods in
+	derived classes now we also have callback functions.
+	
+2005-10-06  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.1.4
+	- Include schema has changed again: mcscli.hh no longer exists, as
+	well as the mcscli library. To specify which classes should be
+	used for client and root thread you must derive the MCSObjFactory
+	class. The CUSTOM_FACTORY macro help realize this task.
+
+	- Class MySynchro has new methods: wait(), to wait until another
+	thread do something, extSync() and selfSync(), to sinchronize with
+	other MySynchro objects.
+
+	- Class DBFac has a new member: tag. This is a char variable
+	for user convenience. It can be set with costructors, or with the
+	setTag method. It can be retrieved with the getTag() method.
+
+	- Class DBQuery has a new method: prepare_and_bind, to perform
+	insert and update on table without worring about binding stuff.
+
+	- In class MyQueue we have a new method: wait, to wait until
+	there's something in the queue. It uses MySynchro::wait.
+
+	- Methods push() of class MyQueue now handles the tag for DBField
+	objects.
+
+	- The static library is no longer supported.
+
+
+2005-09-15  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.1.3
+	- The library is now compiled also in a shared form. Furthermore
+	the "mcscli" class is now in a separate library: libmcscli.
+	
+	- New class MySplit, to help MySocket sending binary data and
+	files 
+
+	- New methods: MySocket::sendData and MySocket::recvData
+
+2005-08-24  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.1.2
+	- Internal include schema has changed.
+
+	- Some files in the package have been moved to another location,
+	the 'doc' directory now is outside this package.
+
+	- Solved problem of 'Headers cannot be compiled' in the configure
+	script.
+
+	- New method: MyQueue::first() to get a copy of the first element
+	without removing from the queue, MyQueue::waitID2beRetrieved to
+	wait until a object is "popped" out of the queue, with timeout
+	capability. In DBField the pair DBField::prepareBuffer() and
+	DBField::DBField(void*, size_t) let you serialize and deserialize
+	a DBField object.
+
+	- New base commands: GDATA and SDATA, respectively to send and
+	retrieve DBField objects through the socket. Also two new MyQueue
+	objects are available in any MCSCLient and mcscli object.
+	
+2005-08-04  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.1.1
+	- New classes: MySocket (to handle all tcp connections), and
+	MyConf (to read and write configuration file)
+
+	- The DBQuery class now has a new map facility: you can remap the
+	indexes to access the fields (see newFieldMap method()).
+
+	- The CommonC++ is not needed anymore, now we use wvStreams
+	instead because it's a more complete network framework and it has
+	more examples, furthermore the software work the way it's written
+	in the documentation. Use of SSL is planned in the near future.
+
+	- New reference documentation for almost all classes and function
+	used inside mcs. Generated by DoxyGen.
+	
+2005-08-01  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.1.0
+	- New classes: MyThread (base class for all threaded objects),
+	MyQueue (a queue that is thread-safe and has a DBField object as
+	base type).
+
+	- DBField now has an operator= method defined.
+	
+2005-07-26  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.0.9
+	- Test programs updated
+
+	- Class MCSHandleCmd reimplemented to work only with DBField- as
+	parameters, also new switch system
+
+	- All code that does derive from MCSThread now has a try..catch
+	block in its main parts. All the rest of the code now use
+	ThrowMYErr to signal exceptions.
+
+	- Fixed warnings
+	
+2005-07-19  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.0.8
+	- New test programs (subdir test).
+
+	- New general purpose class: MYError, for error tracking. In the
+	future this will be used throughout all MCS code with the
+	try..catch model.
+
+	- Fixed bug about buffer lengths in DBFac when type is
+	DBTYPE_STRING. MySQL type VAR_STRING also handled.
+
+	- Behaviour for "cl_work" changed: if true user will have their
+	usual work directory, if false the "glpath" will be used instead.
+
+	- "cl_batch", "cl_verbose", "cl_netquiet" removed, they are
+	useless, "cl_use_app_ini", "cl_work_cid" added. Furthermore the
+	default values for switches has changed.
+	
+	- New common functions: C2N, to translate retrieve the code of a
+	server message. localAddress, IHAlocalAddress and STRlocalAddress
+	to deal with the address chosen by the server
+	
+2005-07-07  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.0.7
+	- New DB type: DBTYPE_TIME, to handle MySQL's TIME, DATE and
+	DATETIME fields.
+
+
+2004-11-26  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.0.6
+
+	- New DB Facilities are used: DBConnection, DBField, DBQuery and
+	DBTable
+
+	- New rules to transfer file: now the client has an active role
+	during file transfer, to prevent misusing or network resources
+	when something goes wrong
+
+	- mcscli.pl has been updated to support file transfer
+
+	- New commands: "TLIST" and "TINFO"
+
+	- New PHP client facility
+	
+2004-11-16  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.0.5
+
+	- No more global variables are used
+
+	- New MCSEnvironment switch: cl_root_kills_mcs. Set to true if you
+	want that an error during the execution of the root thread kills
+	the entire server. Set to false by default
+	
+	
+2004-10-11  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.0.4
+	- New flag: MCSEnv::server_running
+	This flag is handled by the server itself and can be used to check
+	if the server is running or not, without using the MCSServer
+	reference.
+
+	- New field: MCSEnv::max_users
+	To specify how many clients can be simultaneously connected, the
+	default is 100.
+
+	- New logical behaviour for the MCSEnv::cl_mkdirs flag
+
+	- Minor fixes
+
+
+2004-10-07  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.0.3
+	- Enabled the MCSEnv::cl_mkdir switch
+
+	- A new class is embedded in the library: mcscli 
+	It can be used as a client library to connect to the server.
+
+	- Three new hooks are present: 
+	MCSClient::hk_auth() to customize the authentication process
+	MCSClient::hk_postexec() to see if a command executed correctly
+	MCSRoot::hk_log() to be aware of all the operations made by
+	clients.
+
+	- IMPORTANT: the documentation for the mcscli class and the hooks
+	have yet to be written. Anyway the methods are self-explaining,
+	and documentation will be ready in few days.
+
+
+	
+2004-07-29  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.0.2
+	- Fixed some problems about segmentation faults
+
+	- Users no more need to create the entire environment (directory
+	structure and DB tables) to let applications work
+
+	- The MCS_HAVE_DB have been substituted by the flag cl_have_db in
+	the MCSEnv class.
+
+	
+	
+2004-07-23  Giorgio Calderone <gcalderone@pa.iasf.cnr.it>, ver. 0.0.1
+
+	- First release of mcs.
+
+	- New reference documentation added in (by default)
+	/usr/local/share/mcs/doc/html
+
+	- I decided not to use templates anymore, because they aren't yet
+	fully supported by g++. Instead I use two symbols and an include
+	file, an example follows:
+
+	  #define MCS_USERCLASS myClient
+	  #define MCS_ROOTCLASS myRoot
+	  #include <mcs_user.hh>
+
+	With the first two lines you specify the classes you wish to use
+	as user thread and root thread, with the third you let it know to
+	MCSServer, which is responsible to create them.
+	
+	- I've added a new utility: mcs-config. It is very helpful to
+	compile user programs, just type:
+
+	  g++ `mcs-config --cflags` -c myprog.cc
+	  g++  -o myprog myprog.o  `mcs-config --libs`
+
+	and you have your program compiled and linked with mcs and all the
+	other libraries.

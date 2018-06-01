@@ -1,0 +1,23 @@
+----------------------------------------------------------------------
+MCS test suite.
+Giorgio Calderone, INAF/IFC Palermo, gcalderone@ifc.inaf.it
+Luciano Nicastro, INAF/IASF Bologna, nicastro@iasfbo.inaf.it
+----------------------------------------------------------------------
+
+This directory contains the test suite for MCS software. These program can be
+used to check if the MCS software work correctly, and even as an example on
+how to write additional code.
+
+Before running the programs you should check that you have:
+ - a MySQL server running
+ - a database named 'test'
+ - a MySQL account (username 'mcstest' and password 'mcstest') that can create
+   tables in the 'test' database, this can be done on a mysql client program
+   with the following SQL statement:
+
+   GRANT ALL PRIVILEGES ON test.* TO mcstest@localhost IDENTIFIED BY 'mcstest';
+
+
+The programs can be compiled using the command 'make' in this
+directory. The entire suite can be executed using the command 'make
+test'.

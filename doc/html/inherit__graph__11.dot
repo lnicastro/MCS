@@ -1,0 +1,19 @@
+digraph G
+{
+  edge [fontname="FreeSans.ttf",fontsize=10,labelfontname="FreeSans.ttf",labelfontsize=10];
+  node [fontname="FreeSans.ttf",fontsize=10,shape=record];
+  rankdir=LR;
+  Node1 [label="mcs::Serializable",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1Serializable.html",tooltip="Serialize memory buffers or files into chunks."];
+  Node1 -> Node2 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node2 [label="mcs::Data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1Data.html",tooltip="A general purpose data type."];
+  Node1 -> Node3 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node3 [label="mcs::Record",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1Record.html",tooltip="A dynamic array of Data objects."];
+  Node3 -> Node4 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node4 [label="mcs::ClientInfo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1ClientInfo.html",tooltip="Class holding information about a client connection."];
+  Node3 -> Node5 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node5 [label="mcs::FITSWriter",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1FITSWriter.html",tooltip="Write a fits file."];
+  Node6 [label="mcs::Synchro",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1Synchro.html",tooltip="A simple class to implement &quot;critical sections&quot;."];
+  Node6 -> Node7 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+  Node7 [label="mcs::Dynamic_Array\< BASE \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classmcs_1_1Dynamic__Array.html",tooltip="A thread safe, template class to handle an array of objects."];
+  Node6 -> Node3 [dir=back,color="midnightblue",fontsize=10,style="solid",fontname="FreeSans.ttf"];
+}

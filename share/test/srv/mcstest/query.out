@@ -1,0 +1,13 @@
+Prepared query: select user()
+Number of parameters: 0
+SELECT-LIKE query: select user()
+Number of records: 1
+Number of fields:  1
+Fields detail follows:
+Field #0:
+  Name      : user()
+  Type      : STRING
+  Unsigned  : false
+  Max length: 77
+  Length    : 17
+mcstest@localhost	

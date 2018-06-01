@@ -1,0 +1,49 @@
+Prepared query: SELECT c, i, f, d, m, id FROM mcstest
+Number of parameters: 0
+SELECT-LIKE query: SELECT c, i, f, d, m, id FROM mcstest
+Number of records: 7
+Number of fields:  6
+Fields detail follows:
+Field #0:
+  Name      : c
+  Type      : STRING
+  Unsigned  : false
+  Max length: 10
+  Length    : 5
+Field #1:
+  Name      : i
+  Type      : INT
+  Unsigned  : false
+  Max length: 4
+  Length    : 4
+Field #2:
+  Name      : f
+  Type      : FLOAT
+  Unsigned  : false
+  Max length: 4
+  Length    : 4
+Field #3:
+  Name      : d
+  Type      : TIME
+  Unsigned  : false
+  Max length: 36
+  Length    : 36
+Field #4:
+  Name      : m
+  Type      : MEDIUM
+  Unsigned  : false
+  Max length: 4
+  Length    : 4
+Field #5:
+  Name      : id
+  Type      : INT
+  Unsigned  : true
+  Max length: 4
+  Length    : 4
+hello	1	1.23	1970-01-01 01:00:00	99	1	
+bye	2	4.56	2000-01-02 03:04:05	8388607	2	
+mmhhh	3	0.01	2006-02-04 03:02:01	NULL	3	
+AHOUPD	40	1.2345	1976-04-23 00:00:00	NULL	4	
+---	5	NULL	2006-02-14 11:12:13	NULL	5	
+GiorgioUPD	60	NULL	NULL	NULL	6	
+INSERT	7	NULL	NULL	NULL	7	

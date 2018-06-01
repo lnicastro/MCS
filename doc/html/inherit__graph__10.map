@@ -1,0 +1,7 @@
+<area shape="rect" href="$classmcs_1_1HostInfo.html" title="Retrieve informations about a network host." alt="" coords="5,5,109,32">
+<area shape="rect" href="$classmcs_1_1Socket.html" title="Manage TCP sockets." alt="" coords="168,5,264,32">
+<area shape="rect" href="$classmcs_1_1Client.html" title="Connect to a MCS server as a client." alt="" coords="343,5,431,32">
+<area shape="rect" href="$classmcs_1_1RecordSet.html" title="The base class that implement the data abstraction layer." alt="" coords="157,56,275,83">
+<area shape="rect" href="$classmcs_1_1FITSReader.html" title="Read a FITS file." alt="" coords="323,56,451,83">
+<area shape="rect" href="$classmcs_1_1Query.html" title="Execute queries on the database." alt="" coords="341,107,432,133">
+<area shape="rect" href="$classmcs_1_1Table.html" title="A class to directly set and retrieve value from a database table." alt="" coords="500,107,585,133">

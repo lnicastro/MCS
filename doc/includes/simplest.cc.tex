@@ -1,0 +1,16 @@
+% Remember to use the lgrind style
+
+\Head{}
+\File{simplest.cc}{2007}{3}{21}{23:48}{257}
+\L{\LB{\C{}//Mandatory_includes_for_every_MCS-based_application\CE{}}}
+\L{\LB{\K{\#include}_\<\V{mcs}.\V{hh}\>}}
+\L{\LB{\K{using}_\K{namespace}_\V{mcs};}}
+\L{\LB{}}
+\L{\LB{\C{}//Main_program\CE{}}}
+\index{main}\Proc{main}\L{\LB{\K{int}_\V{main}(\K{int}_\V{argc},_\K{char}_*\V{argv}[\,])_\{}}
+\L{\LB{}\Tab{2}{\C{}//Start_the_server.\,.\,.\CE{}}}
+\L{\LB{}\Tab{2}{\V{Env}*_\V{env}_=_\V{mcsStart}(\S{}\3simplest\3\SE{});}}
+\L{\LB{}}
+\L{\LB{}\Tab{2}{\C{}//.\,.\,.and_wait_for_its_termination\CE{}}}
+\L{\LB{}\Tab{2}{\V{mcsWait}(\V{env});}}
+\L{\LB{\}}}

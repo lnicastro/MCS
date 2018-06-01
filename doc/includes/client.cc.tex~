@@ -1,0 +1,68 @@
+% ----------------------------------------------------------------------^
+% Copyright (C) 2004, 2005, 2006, 2007, 2008 Giorgio Calderone
+% (mail to: <gcalderone@ifc.inaf.it>)
+% 
+% This file is part of MCS.
+% 
+% MCS is free software; you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 2 of the License, or
+% (at your option) any later version.
+% 
+% MCS is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with MCS; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+% 
+% ----------------------------------------------------------------------$
+% Remember to use the lgrind style
+
+\Head{}
+\File{client.cc}{2007}{3}{21}{23:48}{847}
+\L{\LB{\K{\#include}_\<\V{mcs}.\V{hh}\>}}
+\L{\LB{\K{using}_\K{namespace}_\V{mcs};}}
+\L{\LB{}}
+\index{main}\Proc{main}\L{\LB{\K{int}_\V{main}(\K{int}_\V{argc},_\K{char}*_\V{argv}[\,])}}
+\L{\LB{\{}}
+\L{\LB{}\Tab{2}{\K{int}_\V{i};}}
+\L{\LB{}\Tab{2}{\V{Client}*_\V{cli};}}
+\L{\LB{}}
+\L{\LB{}\Tab{2}{\K{try}_\{}}
+\L{\LB{}\Tab{4}{\V{cli}_=_\K{new}_\V{Client}(\S{}\3./\3\SE{},_\S{}\3localhost\3\SE{});}}
+\L{\LB{}}
+\L{\LB{}\Tab{4}{\V{cli}\-\!\>\V{login}(\S{}\3mcstest\3\SE{},_\S{}\3mcstest\3\SE{});}}
+\L{\LB{}\Tab{4}{\V{cli}\-\!\>\V{exec}(\S{}\3CID\3\SE{});}}
+\L{\LB{}}
+\L{\LB{}\Tab{4}{\V{cout}_\<\<_\S{}\3Client_identifier_is:_\3\SE{}_\<\<_\V{cli}\-\!\>\V{aux}[\N{0}].\V{ival}()_\<\<_\V{endl};}}
+\L{\LB{}}
+\L{\LB{}\Tab{4}{\V{cli}\-\!\>\V{exec}(\S{}\3CID_\-help\3\SE{});}}
+\L{\LB{}\Tab{4}{\K{for}_(\V{i}=\N{0};_\V{i}\<\V{cli}\-\!\>\V{out}.\V{count}();_\V{i}++)}}
+\L{\LB{}\Tab{6}{\V{cout}_\<\<_\V{cli}\-\!\>\V{out}[\V{i}].\V{sval}()_\<\<_\V{endl};}}
+\L{\LB{}}
+\L{\LB{}\Tab{4}{\V{cli}\-\!\>\V{exec}(\S{}\3qry_SELECT_*_FROM_mcstest\3\SE{});}}
+\L{\LB{}\Tab{4}{\V{cout}_\<\<_\S{}\3Number_of_rows:_\3\SE{}_\<\<_\V{cli}\-\!\>\V{nRows}()_\<\<_\V{endl};}}
+\L{\LB{}}
+\L{\LB{}\Tab{4}{\K{for}_(\V{i}=\N{0};_\V{i}\<\V{cli}\-\!\>\V{nFields}();_\V{i}++)}}
+\L{\LB{}\Tab{6}{\V{cout}_\<\<_\V{cli}\-\!\>\V{metarec}()[\V{i}].\V{name}()_\<\<_\S{}\3\2t\3\SE{};}}
+\L{\LB{}\Tab{4}{\V{cout}_\<\<_\V{endl};}}
+\L{\LB{}}
+\L{\LB{}\Tab{4}{\K{while}_(!_\V{cli}\-\!\>\V{eof}())_\{}}
+\L{\LB{}\Tab{6}{\K{for}_(\V{i}=\N{0};_\V{i}\<\V{cli}\-\!\>\V{nFields}();_\V{i}++)}}
+\L{\LB{}\Tab{8}{\V{cout}_\<\<_\V{cli}\-\!\>\V{rec}()[\V{i}].\V{sval}()_\<\<_\S{}\3\2t\3\SE{};}}
+\L{\LB{}\Tab{6}{\V{cout}_\<\<_\V{endl};}}
+\L{\LB{}}
+\L{\LB{}\Tab{6}{\V{cli}\-\!\>\V{setNext}();}}
+\L{\LB{}\Tab{4}{\}}}
+\L{\LB{}}
+\L{\LB{}\Tab{4}{\V{cli}\-\!\>\V{exec}(\S{}\3BYE\3\SE{});}}
+\L{\LB{}\Tab{4}{\K{delete}_\V{cli};}}
+\L{\LB{}\Tab{2}{\}}}
+\L{\LB{}\Tab{2}{\K{catch}(\V{Event}_\V{e})_\{}}
+\L{\LB{}\Tab{4}{\V{cerr}_\<\<_\V{e}.\V{msg}()_\<\<_\V{endl};}}
+\L{\LB{}\Tab{2}{\}}}
+\L{\LB{\}}}
+\L{\LB{}}

@@ -1,0 +1,37 @@
+% ----------------------------------------------------------------------^
+% Copyright (C) 2004, 2005, 2006, 2007, 2008 Giorgio Calderone
+% (mail to: <gcalderone@ifc.inaf.it>)
+% 
+% This file is part of MCS.
+% 
+% MCS is free software; you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 2 of the License, or
+% (at your option) any later version.
+% 
+% MCS is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with MCS; if not, write to the Free Software
+% Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+% 
+% ----------------------------------------------------------------------$
+% Remember to use the lgrind style
+
+\Head{}
+\File{simplest.cc}{2007}{3}{21}{23:48}{257}
+\L{\LB{\C{}//Mandatory_includes_for_every_MCS-based_application\CE{}}}
+\L{\LB{\K{\#include}_\<\V{mcs}.\V{hh}\>}}
+\L{\LB{\K{using}_\K{namespace}_\V{mcs};}}
+\L{\LB{}}
+\L{\LB{\C{}//Main_program\CE{}}}
+\index{main}\Proc{main}\L{\LB{\K{int}_\V{main}(\K{int}_\V{argc},_\K{char}_*\V{argv}[\,])_\{}}
+\L{\LB{}\Tab{2}{\C{}//Start_the_server.\,.\,.\CE{}}}
+\L{\LB{}\Tab{2}{\V{Env}*_\V{env}_=_\V{mcsStart}(\S{}\3simplest\3\SE{});}}
+\L{\LB{}}
+\L{\LB{}\Tab{2}{\C{}//.\,.\,.and_wait_for_its_termination\CE{}}}
+\L{\LB{}\Tab{2}{\V{mcsWait}(\V{env});}}
+\L{\LB{\}}}

@@ -1,0 +1,6 @@
+<map id="mcs::RecordSet" name="mcs::RecordSet">
+<area shape="rect" id="node2" href="$classmcs_1_1Client.html" title="Connect to a MCS server as a client. " alt="" coords="5,80,77,107"/>
+<area shape="rect" id="node3" href="$classmcs_1_1FITSReader.html" title="Read a FITS file. " alt="" coords="102,80,202,107"/>
+<area shape="rect" id="node4" href="$classmcs_1_1Query.html" title="Execute queries on the database. " alt="" coords="226,80,299,107"/>
+<area shape="rect" id="node5" href="$classmcs_1_1Table.html" title="A class to directly set and retrieve value from a database table. " alt="" coords="227,155,298,181"/>
+</map>
