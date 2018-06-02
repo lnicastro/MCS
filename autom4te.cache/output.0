@@ -19241,7 +19241,7 @@ AC_CONFIG_LIBCONFIG_IN(mcs,share/scripts)
 
 
 #   extra/Makefile
-ac_config_files="$ac_config_files Makefile version contrib/Makefile contrib/libjson/Makefile src/Makefile src/doc.h m4/Makefile doc/Makefile doc/Doxyfile share/Makefile share/client/Makefile share/client/idl/Makefile share/client/idl/c2idl.pl share/client/php/Makefile share/client/python/Makefile share/client/perl/Makefile share/scripts/Makefile share/scripts/mcs-config share/scripts/idl2mcs share/examples/Makefile"
+ac_config_files="$ac_config_files Makefile version contrib/Makefile contrib/libjson/Makefile src/Makefile src/doc.h doc/Makefile doc/Doxyfile share/Makefile share/client/Makefile share/client/idl/Makefile share/client/idl/c2idl.pl share/client/php/Makefile share/client/python/Makefile share/client/perl/Makefile share/scripts/Makefile share/scripts/mcs-config share/scripts/idl2mcs share/examples/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -20397,7 +20397,6 @@ do
     "contrib/libjson/Makefile") CONFIG_FILES="$CONFIG_FILES contrib/libjson/Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "src/doc.h") CONFIG_FILES="$CONFIG_FILES src/doc.h" ;;
-    "m4/Makefile") CONFIG_FILES="$CONFIG_FILES m4/Makefile" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "doc/Doxyfile") CONFIG_FILES="$CONFIG_FILES doc/Doxyfile" ;;
     "share/Makefile") CONFIG_FILES="$CONFIG_FILES share/Makefile" ;;

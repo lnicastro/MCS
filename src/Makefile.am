@@ -86,14 +86,14 @@ bin_PROGRAMS = mcsexec b64codec killmcs
 mcsexec_SOURCES = mcsexec.cc
 
 b64codec_SOURCES = b64codec.cc
-b64codec_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
+b64codec_LDADD = libmcs.la ../contrib/libjson/.libs/libmcsjson.la
 
 if ENABLE_OPENSSL
    bin_PROGRAMS += mcscreatekey
 
    mcscreatekey_SOURCES = mcscreatekey.cc
-   mcscreatekey_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
+   mcscreatekey_LDADD = libmcs.la ../contrib/libjson/.libs/libmcsjson.la
 endif
 
 killmcs_SOURCES = killmcs.cc
-killmcs_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
+killmcs_LDADD = libmcs.la ../contrib/libjson/.libs/libmcsjson.la

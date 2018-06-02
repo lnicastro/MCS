@@ -43,21 +43,21 @@ fits2dbt_SOURCES = fits2dbt.cc
 #AM_LDFLAGS = `mcs-config --libs`
 #AM_LDFLAGS = `/bin/sh ../scripts/mcs-config --libs`
 
-data_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-data1_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-db1_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-db2_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-server1_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-client1_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-client_c_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-client_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-buffer_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-pipe_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-command_parser_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-conf_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-datetime_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-fitsimg_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
-fits2dbt_LDADD = ../../contrib/libjson/.libs/libmcsjson.la ../../src/.libs/libmcs.la
+data_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+data1_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+db1_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+db2_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+server1_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+client1_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+client_c_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+client_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+buffer_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+pipe_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+command_parser_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+conf_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+datetime_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+fitsimg_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
+fits2dbt_LDADD = ../../src/.libs/libmcs.la ../../contrib/libjson/.libs/libmcsjson.la
 
 CLEANFILES = $(bin_PROGRAMS)
 

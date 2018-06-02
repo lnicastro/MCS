@@ -1015,7 +1015,6 @@ AC_CONFIG_FILES([
    contrib/libjson/Makefile
    src/Makefile
    src/doc.h
-   m4/Makefile
    doc/Makefile
    doc/Doxyfile
    share/Makefile

@@ -163,18 +163,17 @@ libmcs_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(CXXFLAGS) $(libmcs_la_LDFLAGS) $(LDFLAGS) -o $@
 am_b64codec_OBJECTS = b64codec.$(OBJEXT)
 b64codec_OBJECTS = $(am_b64codec_OBJECTS)
-b64codec_DEPENDENCIES = ../contrib/libjson/.libs/libmcsjson.la \
-	libmcs.la
+b64codec_DEPENDENCIES = libmcs.la \
+	../contrib/libjson/.libs/libmcsjson.la
 am_killmcs_OBJECTS = killmcs.$(OBJEXT)
 killmcs_OBJECTS = $(am_killmcs_OBJECTS)
-killmcs_DEPENDENCIES = ../contrib/libjson/.libs/libmcsjson.la \
-	libmcs.la
+killmcs_DEPENDENCIES = libmcs.la \
+	../contrib/libjson/.libs/libmcsjson.la
 am__mcscreatekey_SOURCES_DIST = mcscreatekey.cc
 #am_mcscreatekey_OBJECTS = mcscreatekey.$(OBJEXT)
 mcscreatekey_OBJECTS = $(am_mcscreatekey_OBJECTS)
-#mcscreatekey_DEPENDENCIES =  \
-#	../contrib/libjson/.libs/libmcsjson.la \
-#	libmcs.la
+#mcscreatekey_DEPENDENCIES = libmcs.la \
+#	../contrib/libjson/.libs/libmcsjson.la
 am_mcsexec_OBJECTS = mcsexec.$(OBJEXT)
 mcsexec_OBJECTS = $(am_mcsexec_OBJECTS)
 mcsexec_LDADD = $(LDADD)
@@ -510,11 +509,11 @@ nodist_libmcs_la_SOURCES = mcs_fortran.c
 CLEANFILES = mcs_fortran.c
 mcsexec_SOURCES = mcsexec.cc
 b64codec_SOURCES = b64codec.cc
-b64codec_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
+b64codec_LDADD = libmcs.la ../contrib/libjson/.libs/libmcsjson.la
 #mcscreatekey_SOURCES = mcscreatekey.cc
-#mcscreatekey_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
+#mcscreatekey_LDADD = libmcs.la ../contrib/libjson/.libs/libmcsjson.la
 killmcs_SOURCES = killmcs.cc
-killmcs_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
+killmcs_LDADD = libmcs.la ../contrib/libjson/.libs/libmcsjson.la
 all: mcs_config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
