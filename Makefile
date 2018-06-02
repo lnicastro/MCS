@@ -389,7 +389,7 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 EXTRA_DIST = configure selectflags.pl selectlibs.pl requirePkg.pl selectphp_path.pl selectswig_ver.pl reconf
-SUBDIRS = contrib src m4 doc share
+SUBDIRS = contrib src doc share
 all: all-recursive
 
 .SUFFIXES:
