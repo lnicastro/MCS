@@ -14,7 +14,7 @@
 #define DATADIR "/usr/local/share/mcs"
 
 /* ENABLE_CFITSIO */
-#define ENABLE_CFITSIO 1
+#define ENABLE_CFITSIO 0
 
 /* ENABLE_CURL */
 #define ENABLE_CURL 0
@@ -47,7 +47,7 @@
 /* #undef HAVE_EXTERN_H */
 
 /* Define to 1 if you have the <fitsio.h> header file. */
-#define HAVE_FITSIO_H 1
+/* #undef HAVE_FITSIO_H */
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
