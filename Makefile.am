@@ -21,7 +21,7 @@
 # ----------------------------------------------------------------------$
 
 EXTRA_DIST = configure selectflags.pl selectlibs.pl requirePkg.pl selectphp_path.pl selectswig_ver.pl reconf
-SUBDIRS = contrib src m4 doc share
+SUBDIRS = contrib src doc share
 
 
 prepdist:
