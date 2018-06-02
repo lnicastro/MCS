@@ -164,17 +164,17 @@ libmcs_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 am_b64codec_OBJECTS = b64codec.$(OBJEXT)
 b64codec_OBJECTS = $(am_b64codec_OBJECTS)
 b64codec_DEPENDENCIES = ../contrib/libjson/.libs/libmcsjson.la \
-	.libs/libmcs.la
+	libmcs.la
 am_killmcs_OBJECTS = killmcs.$(OBJEXT)
 killmcs_OBJECTS = $(am_killmcs_OBJECTS)
 killmcs_DEPENDENCIES = ../contrib/libjson/.libs/libmcsjson.la \
-	.libs/libmcs.la
+	libmcs.la
 am__mcscreatekey_SOURCES_DIST = mcscreatekey.cc
 @ENABLE_OPENSSL_TRUE@am_mcscreatekey_OBJECTS = mcscreatekey.$(OBJEXT)
 mcscreatekey_OBJECTS = $(am_mcscreatekey_OBJECTS)
 @ENABLE_OPENSSL_TRUE@mcscreatekey_DEPENDENCIES =  \
 @ENABLE_OPENSSL_TRUE@	../contrib/libjson/.libs/libmcsjson.la \
-@ENABLE_OPENSSL_TRUE@	.libs/libmcs.la
+@ENABLE_OPENSSL_TRUE@	libmcs.la
 am_mcsexec_OBJECTS = mcsexec.$(OBJEXT)
 mcsexec_OBJECTS = $(am_mcsexec_OBJECTS)
 mcsexec_LDADD = $(LDADD)
@@ -477,7 +477,7 @@ include_HEADERS = \
                    mcs_facility.inc
 
 libmcs_la_LDFLAGS = -version-info @INTERFACE_VERSION@
-libmcs_la_CXXFLAGS = -I../contrib/libjson
+libmcs_la_CXXFLAGS = -I../contrib/libjson -fno-rtti
 libmcs_la_SOURCES = \
 		   mcs_config.h      \
 		   mcs.hh            \
@@ -510,11 +510,11 @@ nodist_libmcs_la_SOURCES = mcs_fortran.c
 CLEANFILES = mcs_fortran.c
 mcsexec_SOURCES = mcsexec.cc
 b64codec_SOURCES = b64codec.cc
-b64codec_LDADD = ../contrib/libjson/.libs/libmcsjson.la .libs/libmcs.la
+b64codec_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
 @ENABLE_OPENSSL_TRUE@mcscreatekey_SOURCES = mcscreatekey.cc
-@ENABLE_OPENSSL_TRUE@mcscreatekey_LDADD = ../contrib/libjson/.libs/libmcsjson.la .libs/libmcs.la
+@ENABLE_OPENSSL_TRUE@mcscreatekey_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
 killmcs_SOURCES = killmcs.cc
-killmcs_LDADD = ../contrib/libjson/.libs/libmcsjson.la .libs/libmcs.la
+killmcs_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
 all: mcs_config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 

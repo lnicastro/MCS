@@ -46,7 +46,7 @@ include_HEADERS =                    \
                    mcs_facility.inc
 
 libmcs_la_LDFLAGS = -version-info @INTERFACE_VERSION@
-libmcs_la_CXXFLAGS = -I../contrib/libjson
+libmcs_la_CXXFLAGS = -I../contrib/libjson -fno-rtti
 
 libmcs_la_SOURCES =                  \
 		   mcs_config.h      \
@@ -86,14 +86,14 @@ bin_PROGRAMS = mcsexec b64codec killmcs
 mcsexec_SOURCES = mcsexec.cc
 
 b64codec_SOURCES = b64codec.cc
-b64codec_LDADD = ../contrib/libjson/.libs/libmcsjson.la .libs/libmcs.la
+b64codec_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
 
 if ENABLE_OPENSSL
    bin_PROGRAMS += mcscreatekey
 
    mcscreatekey_SOURCES = mcscreatekey.cc
-   mcscreatekey_LDADD = ../contrib/libjson/.libs/libmcsjson.la .libs/libmcs.la
+   mcscreatekey_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
 endif
 
 killmcs_SOURCES = killmcs.cc
-killmcs_LDADD = ../contrib/libjson/.libs/libmcsjson.la .libs/libmcs.la
+killmcs_LDADD = ../contrib/libjson/.libs/libmcsjson.la libmcs.la
