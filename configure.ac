@@ -21,9 +21,9 @@
 # ----------------------------------------------------------------------$
 AC_INIT([mcs],
         [0.3.3-alpha7],
-        [Giorgio Calderone <giorgio.calderone@gmail.com> Luciano Nicastro <nicastro@iasfbo.inaf.it>],
+        [Giorgio Calderone <giorgio.calderone@inaf.it> Luciano Nicastro <luciano.nicastro@inaf.it>],
         [mcs])
-INTERFACE_VERSION="4:0:0"
+INTERFACE_VERSION="4:1:0"
 
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR([m4])
@@ -42,9 +42,6 @@ myenable_python=0
 myenable_php=0
 myenable_perl=0
 myenable_openssl=0
-#myenable_myro=0
-#myenable_dif=0
-#myenable_votpp=0
 myenable_curl=0
 
 mypath_cfitsio=""
@@ -79,51 +76,8 @@ if test $myenable_all -eq 1; then
   myenable_php=1
   myenable_perl=1
   myenable_openssl=1
-#  myenable_myro=0
-#  myenable_dif=0
-#  myenable_votpp=0
   myenable_curl=1
 fi
-
-
-#AC_ARG_ENABLE(myro,
-#    [AC_HELP_STRING([--enable-myro], [Enable MyRO facilities])],
-#    [if test "$enableval" = "no"; then myenable_myro=0; else myenable_myro=1; fi;],
-#    [])
-#AC_DEFINE_UNQUOTED([ENABLE_MYRO], $myenable_myro, [ENABLE_MYRO])
-#AM_CONDITIONAL(ENABLE_MYRO, test $myenable_myro -eq 1)
-#
-#if test "$myenable_myro" -eq 1; then
-#  AC_CONFIG_SUBDIRS([extra/myro])
-#fi
-#
-#
-#AC_ARG_ENABLE(dif,
-#    [AC_HELP_STRING([--enable-dif], [Enable the Dynamic Index Facility DBEngine])],
-#    [if test "$enableval" = "no"; then myenable_dif=0; else myenable_dif=1; fi;],
-#    [])
-#AC_DEFINE_UNQUOTED([ENABLE_DIF], $myenable_dif, [ENABLE_DIF])
-#AM_CONDITIONAL(ENABLE_DIF, test $myenable_dif -eq 1)
-#
-#AC_ARG_WITH(mysql_source,
-#    [AC_HELP_STRING([--with-mysql-source=PATH], [PATH is the path to the MYSQL source directory (mandatory when using --enable-dif)])],
-#    [mypath_mysql_source="$withval"; ])
-#
-#if test "$myenable_dif" -eq 1; then
-#  AC_CONFIG_SUBDIRS([extra/dif])
-#fi
-
-
-#AC_ARG_ENABLE(votpp,
-#    [AC_HELP_STRING([--enable-votpp], [Enable the VOTable C++ Parser])],
-#    [if test "$enableval" = "no"; then myenable_votpp=0; else myenable_votpp=1; fi;],
-#    [])
-#AC_DEFINE_UNQUOTED([ENABLE_VOTPP], $myenable_votpp, [ENABLE_VOTPP])
-#AM_CONDITIONAL(ENABLE_VOTPP, test $myenable_votpp -eq 1)
-#
-#if test "$myenable_votpp" -eq 1; then
-#  AC_CONFIG_SUBDIRS([extra/votpp])
-#fi
 
 
 #PCRE is mandatory, so we don't have enable-pcre
@@ -132,11 +86,7 @@ AC_ARG_WITH(pcre,
     [mypath_pcre="$withval"])
 
 
-#CURL is mandatory, so we don't have enable-curl
-#AC_ARG_WITH(curl,
-#    [AC_HELP_STRING([--with-curl=PATH], [PATH is the path to the Curl directory])],
-#    [mypath_curl="$withval"])
-#
+#CURL is now optional
 AC_ARG_ENABLE(curl,
     [AC_HELP_STRING([--enable-curl], [Enable Curl facilities])],
     [if test "$enableval" = "no"; then myenable_curl=0; else myenable_curl=1; fi;],
@@ -622,22 +572,6 @@ fi
 AC_DEFINE_UNQUOTED([ENABLE_CFITSIO], $myenable_cfitsio, [ENABLE_CFITSIO])
 AM_CONDITIONAL(ENABLE_CFITSIO, test $myenable_cfitsio -eq 1)
 
-##CFITSIO library (our own version is provided)
-#myerr_cfitsio=""
-#if test $myenable_cfitsio -eq 1; then
-#  AC_CONFIG_SUBDIRS([contrib/cfitsio])
-#
-#  #CFITSIO_CFLAGS="-Icontrib/cfitsio/include"
-#  #CPPFLAGS="$EXT_CPPFLAGS $CFITSIO_CFLAGS"
-#  #
-#  #CFITSIO_LDFLAGS="-Lcontrib/cfitsio/lib"
-#  #LDFLAGS="$EXT_LDFLAGS $CFITSIO_LDFLAGS"
-#  #
-#  #CFITSIO_LIBS="cfitsio"
-#fi
-#AC_DEFINE_UNQUOTED([ENABLE_CFITSIO], $myenable_cfitsio, [ENABLE_CFITSIO])
-#AM_CONDITIONAL(ENABLE_CFITSIO, test $myenable_cfitsio -eq 1)
-
 
 
 
@@ -1015,6 +949,7 @@ AC_CONFIG_FILES([
    contrib/libjson/Makefile
    src/Makefile
    src/doc.h
+   m4/Makefile
    doc/Makefile
    doc/Doxyfile
    share/Makefile
@@ -1048,9 +983,6 @@ Configuration summary:
 Installation prefix: $prefix
 Docs directory: `/bin/sh share/scripts/mcs-config --datadir`/doc
 Debug: $myenable_debug
-
-#Myro: $myenable_myro
-#DIF: $myenable_dif
 
 
 CPPFLAGS: $CPPFLAGS

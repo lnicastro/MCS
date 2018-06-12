@@ -332,7 +332,7 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-INTERFACE_VERSION = 4:0:0
+INTERFACE_VERSION = 4:1:0
 LD = /opt/local/bin/ld
 LDFLAGS =  -L/opt/local/lib  -L/usr/local/mysql/lib 
 LIBOBJS = 
@@ -357,7 +357,7 @@ OPENSSL =
 OTOOL = otool
 OTOOL64 = :
 PACKAGE = mcs
-PACKAGE_BUGREPORT = Giorgio Calderone <giorgio.calderone@gmail.com> Luciano Nicastro <nicastro@iasfbo.inaf.it>
+PACKAGE_BUGREPORT = Giorgio Calderone <giorgio.calderone@inaf.it> Luciano Nicastro <luciano.nicastro@inaf.it>
 PACKAGE_NAME = mcs
 PACKAGE_STRING = mcs 0.3.3-alpha7
 PACKAGE_TARNAME = mcs
@@ -475,7 +475,7 @@ include_HEADERS = \
                    mcs_fortran.inc   \
                    mcs_facility.inc
 
-libmcs_la_LDFLAGS = -version-info 4:0:0
+libmcs_la_LDFLAGS = -version-info 4:1:0
 libmcs_la_CXXFLAGS = -I../contrib/libjson -fno-rtti
 libmcs_la_SOURCES = \
 		   mcs_config.h      \

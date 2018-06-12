@@ -393,7 +393,7 @@ on `(hostname || uname -n) 2>/dev/null | sed 1q`
 "
 
 # Files that config.status was made for.
-config_files=" Makefile version contrib/Makefile contrib/libjson/Makefile src/Makefile src/doc.h doc/Makefile doc/Doxyfile share/Makefile share/client/Makefile share/client/idl/Makefile share/client/idl/c2idl.pl share/client/php/Makefile share/client/python/Makefile share/client/perl/Makefile share/scripts/Makefile share/scripts/mcs-config share/scripts/idl2mcs share/examples/Makefile"
+config_files=" Makefile version contrib/Makefile contrib/libjson/Makefile src/Makefile src/doc.h m4/Makefile doc/Makefile doc/Doxyfile share/Makefile share/client/Makefile share/client/idl/Makefile share/client/idl/c2idl.pl share/client/php/Makefile share/client/python/Makefile share/client/perl/Makefile share/scripts/Makefile share/scripts/mcs-config share/scripts/idl2mcs share/examples/Makefile"
 config_headers=" src/mcs_config.h"
 config_commands=" depfiles libtool"
 
@@ -425,7 +425,7 @@ $config_headers
 Configuration commands:
 $config_commands
 
-Report bugs to <Giorgio Calderone <giorgio.calderone@gmail.com> Luciano Nicastro <nicastro@iasfbo.inaf.it>>."
+Report bugs to <Giorgio Calderone <giorgio.calderone@inaf.it> Luciano Nicastro <luciano.nicastro@inaf.it>>."
 
 ac_cs_config=""
 ac_cs_version="\
@@ -808,6 +808,7 @@ do
     "contrib/libjson/Makefile") CONFIG_FILES="$CONFIG_FILES contrib/libjson/Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "src/doc.h") CONFIG_FILES="$CONFIG_FILES src/doc.h" ;;
+    "m4/Makefile") CONFIG_FILES="$CONFIG_FILES m4/Makefile" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "doc/Doxyfile") CONFIG_FILES="$CONFIG_FILES doc/Doxyfile" ;;
     "share/Makefile") CONFIG_FILES="$CONFIG_FILES share/Makefile" ;;
@@ -890,7 +891,7 @@ S["am__EXEEXT_FALSE"]=""
 S["am__EXEEXT_TRUE"]="#"
 S["LTLIBOBJS"]=""
 S["LIBOBJS"]=""
-S["INTERFACE_VERSION"]="4:0:0"
+S["INTERFACE_VERSION"]="4:1:0"
 S["MCS_CONFIG"]="share/scripts/mcs-config"
 S["MCS_VERSION"]="0.3.3-alpha7"
 S["mcs_libs"]="-lmcsjson -lmcs"
@@ -1053,7 +1054,7 @@ S["program_transform_name"]="s,x,x,"
 S["prefix"]="/usr/local"
 S["exec_prefix"]="${prefix}"
 S["PACKAGE_URL"]=""
-S["PACKAGE_BUGREPORT"]="Giorgio Calderone <giorgio.calderone@gmail.com> Luciano Nicastro <nicastro@iasfbo.inaf.it>"
+S["PACKAGE_BUGREPORT"]="Giorgio Calderone <giorgio.calderone@inaf.it> Luciano Nicastro <luciano.nicastro@inaf.it>"
 S["PACKAGE_STRING"]="mcs 0.3.3-alpha7"
 S["PACKAGE_VERSION"]="0.3.3-alpha7"
 S["PACKAGE_TARNAME"]="mcs"
@@ -1106,7 +1107,7 @@ D["PACKAGE_NAME"]=" \"mcs\""
 D["PACKAGE_TARNAME"]=" \"mcs\""
 D["PACKAGE_VERSION"]=" \"0.3.3-alpha7\""
 D["PACKAGE_STRING"]=" \"mcs 0.3.3-alpha7\""
-D["PACKAGE_BUGREPORT"]=" \"Giorgio Calderone <giorgio.calderone@gmail.com> Luciano Nicastro <nicastro@iasfbo.inaf.it>\""
+D["PACKAGE_BUGREPORT"]=" \"Giorgio Calderone <giorgio.calderone@inaf.it> Luciano Nicastro <luciano.nicastro@inaf.it>\""
 D["PACKAGE_URL"]=" \"\""
 D["PACKAGE"]=" \"mcs\""
 D["VERSION"]=" \"0.3.3-alpha7\""

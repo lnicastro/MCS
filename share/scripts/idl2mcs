@@ -22,7 +22,7 @@
 
 print "IDL to MCS interface\n";
 print "MCS ver. 0.3.3-alpha7\n";
-print 'Giorgio Calderone <giorgio.calderone@gmail.com> Luciano Nicastro <nicastro@iasfbo.inaf.it>' . "\n";
+print 'Giorgio Calderone <giorgio.calderone@inaf.it> Luciano Nicastro <luciano.nicastro@inaf.it>' . "\n";
 print "\n";
 print "This program will create all necessary symbolic links to use the IDL to MCS\n";
 print "interface in the current directory.\n";

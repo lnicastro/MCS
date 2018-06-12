@@ -189,8 +189,8 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/version.in \
 	$(top_srcdir)/config/install-sh $(top_srcdir)/config/ltmain.sh \
 	$(top_srcdir)/config/missing AUTHORS COPYING ChangeLog INSTALL \
 	NEWS README THANKS config/compile config/config.guess \
-	config/config.rpath config/config.sub config/depcomp \
-	config/install-sh config/ltmain.sh config/missing
+	config/config.rpath config/config.sub config/install-sh \
+	config/ltmain.sh config/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -280,7 +280,7 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-INTERFACE_VERSION = 4:0:0
+INTERFACE_VERSION = 4:1:0
 LD = /opt/local/bin/ld
 LDFLAGS =  -L/opt/local/lib  -L/usr/local/mysql/lib 
 LIBOBJS = 
@@ -305,7 +305,7 @@ OPENSSL =
 OTOOL = otool
 OTOOL64 = :
 PACKAGE = mcs
-PACKAGE_BUGREPORT = Giorgio Calderone <giorgio.calderone@gmail.com> Luciano Nicastro <nicastro@iasfbo.inaf.it>
+PACKAGE_BUGREPORT = Giorgio Calderone <giorgio.calderone@inaf.it> Luciano Nicastro <luciano.nicastro@inaf.it>
 PACKAGE_NAME = mcs
 PACKAGE_STRING = mcs 0.3.3-alpha7
 PACKAGE_TARNAME = mcs
@@ -389,7 +389,7 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 EXTRA_DIST = configure selectflags.pl selectlibs.pl requirePkg.pl selectphp_path.pl selectswig_ver.pl reconf
-SUBDIRS = contrib src doc share
+SUBDIRS = contrib src m4 doc share
 all: all-recursive
 
 .SUFFIXES:
