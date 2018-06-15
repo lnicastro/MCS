@@ -45,6 +45,8 @@ int main(int argc, char *argv[]) {
     //Get a pointer to the 5-th byte
     pointer = buf[4];
 
+    cout<<pointer;
+
     //Resize the buffer to twice its actual size
     buf.resize( 2 * buf.size() );
   }

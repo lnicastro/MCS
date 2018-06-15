@@ -189,8 +189,8 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/version.in \
 	$(top_srcdir)/config/install-sh $(top_srcdir)/config/ltmain.sh \
 	$(top_srcdir)/config/missing AUTHORS COPYING ChangeLog INSTALL \
 	NEWS README THANKS config/compile config/config.guess \
-	config/config.rpath config/config.sub config/install-sh \
-	config/ltmain.sh config/missing
+	config/config.rpath config/config.sub config/depcomp \
+	config/install-sh config/ltmain.sh config/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -245,10 +245,10 @@ AWK = gawk
 BINDIR = /usr/local/bin
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFITSIO_LDFLAGS = 
+CFITSIO_LDFLAGS = -L/usr/local/cfitsio/lib -Wl,-rpath,/usr/local/cfitsio/lib
 CFLAGS = -g -O2
 CPP = gcc -E
-CPPFLAGS = -Wall  -DMACH_64 -I/opt/local/include  -I/usr/local/mysql/include 
+CPPFLAGS = -Wall  -DMACH_64 -I/opt/local/include  -I/usr/local/mysql/include  -I/usr/local/cfitsio/include
 CURL_CONFIG = 
 CXX = g++
 CXXCPP = g++ -E
@@ -282,9 +282,9 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 INTERFACE_VERSION = 4:1:0
 LD = /opt/local/bin/ld
-LDFLAGS =  -L/opt/local/lib  -L/usr/local/mysql/lib 
+LDFLAGS =  -L/opt/local/lib  -L/usr/local/mysql/lib  -L/usr/local/cfitsio/lib -Wl,-rpath,/usr/local/cfitsio/lib
 LIBOBJS = 
-LIBS = -lmysqlclient -lpcrecpp -lpthread 
+LIBS = -lcfitsio -lmysqlclient -lpcrecpp -lpthread 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = lipo
 LN_S = ln -s
@@ -370,7 +370,7 @@ libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
 localstatedir = ${prefix}/var
 mandir = ${datarootdir}/man
-mcs_cflags = -Wall  -DMACH_64 -I/opt/local/include  -I/usr/local/mysql/include  -g -O2
+mcs_cflags = -Wall  -DMACH_64 -I/opt/local/include  -I/usr/local/mysql/include  -I/usr/local/cfitsio/include -g -O2
 mcs_libs = -lmcsjson -lmcs
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
@@ -381,7 +381,7 @@ psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
-subdirs = 
+subdirs =  contrib/libjson
 sysconfdir = ${prefix}/etc
 target = 
 target_alias = 
@@ -389,7 +389,7 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 EXTRA_DIST = configure selectflags.pl selectlibs.pl requirePkg.pl selectphp_path.pl selectswig_ver.pl reconf
-SUBDIRS = contrib src doc share
+SUBDIRS = contrib src m4 doc share
 all: all-recursive
 
 .SUFFIXES:

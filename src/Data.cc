@@ -632,15 +632,20 @@ bool mcs::Types2S_FITS(Types dbt, int len, bool isunsigned, string& fits)
     break;
   case BIGINT:
     if (isunsigned)   return false;
-    else              fits = "1K"; break;
+    else              fits = "1K";
+    break;
   case FLOAT:
-    fits = "1E"; break;
+    fits = "1E";
+    break;
   case DOUBLE:
-    fits = "1D"; break;
+    fits = "1D";
+    break;
   case STRING:
-    fits = itos(len) + "A"; break;
+    fits = itos(len) + "A";
+    break;
   case TIME:
-    fits = "20A"; break; //TODO: Implement
+    fits = "20A";
+    break; //TODO: Implement
   default:
     return false;
   }
