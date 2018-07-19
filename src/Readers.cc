@@ -571,7 +571,7 @@ void FITSReader::read_json_header(const string& json_string){
   header.clear();
   cout << "clear comments OK"<<endl;
 
-  for ( int index = 0; index < nkeys; ++index ){  // Iterates over the sequence elements.
+  for ( unsigned int index = 0; index < nkeys; ++index ){  // Iterates over the sequence elements.
 
 
     key=fitskeys[index]["key"].asString();
@@ -671,9 +671,11 @@ void FITSReader::selectHDU(int hdunum)
       fits_get_coltype(fptr, j, &fits_type, &repeat, &width, &status);
       CHECK_FITS_ERROR;
 
+#if ENABLE_MYSQL      
       if (! FITS2Types(fits_type, type, flunsign))
 	throw MCS_ERROR(MSG_TYPE_NOT_HANDLED, i, fits_type);
-
+#endif
+      
       if (! VarLenType(type))
 	width = 0;
 

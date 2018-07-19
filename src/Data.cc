@@ -701,11 +701,13 @@ void mcs::Data::resize(string dimSpec)
   if (dimSpec == "")
     return;
 
+#if ENABLE_MYSQL
   //Multi-dimensional array are a VOTable feature, they're not allowed
   //on the DB side.
   if (lbind)
     throw MCS_ERROR( MSG_CANT_BIND_AND_HAVE_DIMSPEC );
-
+#endif
+  
   //Initialize all dim-related variables
   for (i=0; i<MCS_DATA_NDIM; i++)
     ldim[i] = 1;
@@ -970,7 +972,11 @@ void mcs::Data::init(MYSQL_BIND* bind, Types type, const char* name,
   lname = string(name);
   lisunsigned = isunsigned;
   lisnull = false;
+#if ENABLE_MYSQL
   lautoincr = (bool) (flags & AUTO_INCREMENT_FLAG);
+#else
+  lautoincr = false;
+#endif
   lflags = flags;
   tag = 0;
   setSourceID(MCS_ID_UNKNOWN);
