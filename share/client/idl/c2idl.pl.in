@@ -421,7 +421,11 @@ sub parseFunction {
     print OutSrc "\n";
     for ($i=0; $i<$parcount; $i++) {
 	$l = "IDL_TYP_" . Ctype2IDLtype($parsType[$i]);
-	print OutSrc "  p[$i] = (argv[$i]->type == $l ? argv[$i] : IDL_BasicTypeConversion(1, &(argv[$i]), $l));\n";
+	if ($l eq "IDL_TYP_STRING") {
+	    print OutSrc "  p[$i] = (argv[$i]->type == $l ? argv[$i] : IDL_CvtByte(1, &(argv[$i])));\n";
+	} else {
+	    print OutSrc "  p[$i] = (argv[$i]->type == $l ? argv[$i] : IDL_BasicTypeConversion(1, &(argv[$i]), $l));\n";
+	}
     }
     print OutSrc "\n";
 
