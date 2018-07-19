@@ -1,5 +1,11 @@
 #include <unistd.h>
 
+/*
+  NOTE: to compile this program the `-fno-rtti` option is required to avoid the error:
+     undefined reference to typeinfo for Thread::Thread
+ */
+
+
 #include <mcs.hh>
 using namespace mcs;
 
