@@ -24,7 +24,10 @@ while (<>) {
 	print;
     }
     else {
-	s/;\s*(\S)/;\n$1/g;
+	if ($_ =~ /define IFD_EXTRA/) {
+	} else {
+	    s/;\s*(\S)/;\n$1/g;
+	}
 	s/([{}])\s+(\S)/$1\n$2/g;
 	s/\#\#\#/\#/g;
 	s/__file__/__FILE__/g;

@@ -100,7 +100,13 @@ IFD_WRAP(long long int,          Data, lval       , This->lval()        );
 IFD_WRAP(unsigned long long int, Data, ulval      , This->ulval()       );
 IFD_WRAP(float,                  Data, fval       , This->fval()        );
 IFD_WRAP(double,                 Data, dval       , This->dval()        );
-IFD_WRAP(char*,                  Data, sval       , This->sval().c_str());
+
+###undef  IFD_EXTRA
+###define IFD_EXTRA static string s; s = This->sval(); 
+IFD_WRAP(char*,                  Data, sval       , s.c_str());
+###undef  IFD_EXTRA
+###define IFD_EXTRA
+
 IFD_WRAP(unsigned int,           Data, tval       , This->tval()        );
 
 
@@ -313,12 +319,18 @@ IFD_CONSTRUCTOR(Conf, (filename), ARG(char*, filename));
 
 IFD_DESTRUCTOR(Conf);
 
+
+###undef  IFD_EXTRA
+###define IFD_EXTRA static string s; s = This->sval(section, key, "")
 IFD_WRAP(char*,           Conf, sval,                 \
-	  This->sval(section, key, false).c_str(),     \
+	  s.c_str(),     \
 	  ARG(char*, section)  ARG(char*, key));
+###undef  IFD_EXTRA
+###define IFD_EXTRA
+
 
 IFD_WRAP(int,             Conf, ival,                 \
-	  This->ival(section, key, false),             \
+	  This->ival(section, key, -1),             \
 	  ARG(char*, section)  ARG(char*, key));
 
 
