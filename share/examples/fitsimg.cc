@@ -43,32 +43,32 @@ int main(int argc, char* argv[])
     string name;
     short type;
     string fldname;
-   } kwd [n_hdr_kwds];
+  } kwd [n_hdr_kwds];
 
-   string kwd_name[n_hdr_kwds] = {"CAT-RA","CAT-DEC","OBJECT","USERID","OBSTYPE","OBSID","PROPID",
-      "FILTER1","INSTRUME","DATE-OBS","LST",  //string
-      "CRVAL1","CRVAL2","AZIMUTH","ALTITUDE","MJD",  //DBL
-      "EXPTIME","SEEING","AIRMASS","BACKGRD","STDDEV","MOONDIST","MOONFRAC",  //FLT
-      "GRPUID","CONFIGID",  //INT
-      "GRPNUMOB"  //SHORT
-    };
+  string kwd_name[n_hdr_kwds] = {"CAT-RA","CAT-DEC","OBJECT","USERID","OBSTYPE","OBSID","PROPID",
+				 "FILTER1","INSTRUME","DATE-OBS","LST",  //string
+				 "CRVAL1","CRVAL2","AZIMUTH","ALTITUDE","MJD",  //DBL
+				 "EXPTIME","SEEING","AIRMASS","BACKGRD","STDDEV","MOONDIST","MOONFRAC",  //FLT
+				 "GRPUID","CONFIGID",  //INT
+				 "GRPNUMOB"  //SHORT
+  };
 
-    short kwd_type[n_hdr_kwds] = {
-      STRING,STRING,STRING,STRING,STRING,STRING,STRING,STRING,STRING,STRING,STRING,
-      DOUBLE,DOUBLE,DOUBLE,DOUBLE,DOUBLE,
-      FLOAT,FLOAT,FLOAT,FLOAT,FLOAT,FLOAT,FLOAT,
-      INT,INT,
-      SMALL
-    };
+  short kwd_type[n_hdr_kwds] = {
+    STRING,STRING,STRING,STRING,STRING,STRING,STRING,STRING,STRING,STRING,STRING,
+    DOUBLE,DOUBLE,DOUBLE,DOUBLE,DOUBLE,
+    FLOAT,FLOAT,FLOAT,FLOAT,FLOAT,FLOAT,FLOAT,
+    INT,INT,
+    SMALL
+  };
 
-    string kwd_fldname[n_hdr_kwds] = {
-      "ras","decs","object","pi_coi","obstype","obsID","propID",
-      "filter","instrume","date_obs","lst",
-      "radeg","decdeg","azdeg","eldeg","mjdobs",
-      "exptime","seeing","airmass","dettotbg","detbgdev","moondist","moonphas",
-      "grpuID","configID",
-      "grpnumob"
-    };
+  string kwd_fldname[n_hdr_kwds] = {
+    "ras","decs","object","pi_coi","obstype","obsID","propID",
+    "filter","instrume","date_obs","lst",
+    "radeg","decdeg","azdeg","eldeg","mjdobs",
+    "exptime","seeing","airmass","dettotbg","detbgdev","moondist","moonphas",
+    "grpuID","configID",
+    "grpnumob"
+  };
 
   for (i=0; i<n_hdr_kwds; i++) {
     kwd[i].name = kwd_name[i];
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 
   Record row;
 
-// These fields are managed by table triggers
+  // These fields are managed by table triggers
   //Data datein(NULL, TIME, (char *) "datein");
   //datein = time(NULL);
   //Data htmID_6(NULL, SMALL, (char *) "htmID_6", 0, true);
@@ -97,46 +97,46 @@ int main(int argc, char* argv[])
 
       fits.open(argv[i]);
 
-//Print header
-    for (i=0; i<fits.header.count(); i++) {
-	  cout <<
-	    fits.header[i].name() << " = " <<
-	    fits.header[i].sval() << " / " <<
-	    fits.header_comments[i].sval() << endl;
+      //Print header
+      for (i=0; i<fits.header.count(); i++) {
+	cout <<
+	  fits.header[i].name() << " = " <<
+	  fits.header[i].sval() << " / " <<
+	  fits.header_comments[i].sval() << endl;
 
         for (j=0; j<n_hdr_kwds; j++) {
           if (fits.header[i].name().compare(kwd[j].name) == 0) {
-cout<<"Found "<< kwd[j].name<< endl;
+	    cout<<"Found "<< kwd[j].name<< endl;
 
             switch (kwd[j].type) {  // ignore types: all STRING
-              case STRING:
-              case DOUBLE:
-              case FLOAT:
-              case INT:
-              case SMALL:
-                row.addField(trimfs(fits.header[i].sval()));
-// Standard Date format replacing the T with blank
-                if ( (kwd[j].fldname.compare("date_obs") == 0) &&
-                     (fits.header[i].sval().length() > 10) ) {
-                  size_t tp = fits.header[i].sval().find("T");
-                  if (tp > 0) {
-                    string s = row[ik].sval(); 
-cout << "tp="<<tp <<" "<< s << endl;
-                    s.replace(tp,1," ");
-cout << "tp="<<tp <<" "<< s << endl;
-row[ik] = s;
-                  }
-                }
+	    case STRING:
+	    case DOUBLE:
+	    case FLOAT:
+	    case INT:
+	    case SMALL:
+	      row.addField(trimfs(fits.header[i].sval()));
+	      // Standard Date format replacing the T with blank
+	      if ( (kwd[j].fldname.compare("date_obs") == 0) &&
+		   (fits.header[i].sval().length() > 10) ) {
+		size_t tp = fits.header[i].sval().find("T");
+		if (tp > 0) {
+		  string s = row[ik].sval(); 
+		  cout << "tp="<<tp <<" "<< s << endl;
+		  s.replace(tp,1," ");
+		  cout << "tp="<<tp <<" "<< s << endl;
+		  row[ik] = s;
+		}
+	      }
 
-//cout << "row="<< row[ik].sval() <<endl;
-                break;
+	      //cout << "row="<< row[ik].sval() <<endl;
+	      break;
 
-              default:
-                break;
+	    default:
+	      break;
             }
 
             row[ik].setName(kwd[j].fldname);
-cout<<ik<<" "<<row[ik].name()<<" "<<row[ik].sval() << "\n";
+	    cout<<ik<<" "<<row[ik].name()<<" "<<row[ik].sval() << "\n";
             ik++;
             break;
           }
@@ -146,30 +146,30 @@ cout<<ik<<" "<<row[ik].name()<<" "<<row[ik].sval() << "\n";
       cout <<"Transferred "<< ik <<" kwds"<< endl;
       cout <<"BITPIX="<< fits.header["BITPIX"].sval() << endl;
 	
-//Print field names
+      //Print field names
       cout << row.asStringNames() << endl;
 
-//Print field types
+      //Print field types
       cout << row.asStringTypes() << endl;
 
-//Print data
+      //Print data
       for (i=0; i<row.count(); i++)
         cout << i <<" "<< row[i].name() <<" = "<< row[i].sval()<< endl;
 
-        fits.close();
-      }
+      fits.close();
+    }
 
-// Here the data can be inserted into the DB table
-/*
+    // Here the data can be inserted into the DB table
+    /*
       string plist = auto_fields;
 
       db.connect(DB_USER, DB_PASS, DB_NAME, DB_HOST);
       query = new Query(&db, false);
 
       for (i=0; i<n_hdr_kwds; i++)
-        plist += kwd[i].fldname + bl;
+      plist += kwd[i].fldname + bl;
       for (i=n_hdr_kwds; i<n_hdr_kwds+n_extra_flds-1; i++)
-        plist += row[i].name() + bl;
+      plist += row[i].name() + bl;
       plist += row[i].name();
 
       query->prepare_with_parameters(MCS_PAB_INSERT, plist, tabname);
@@ -178,12 +178,12 @@ cout<<ik<<" "<<row[ik].name()<<" "<<row[ik].sval() << "\n";
       query->param()[2] = 0;
 
       for (i=0; i<n_hdr_kwds; i++){
-        query->param()[kwd[i].fldname] = row[kwd[i].fldname].sval();
+      query->param()[kwd[i].fldname] = row[kwd[i].fldname].sval();
       }
 
       for (i=n_hdr_kwds; i<n_hdr_kwds+n_extra_flds; i++) {
-        string fldn = row[i].name();
-        query->param()[fldn] = row[fldn].sval();
+      string fldn = row[i].name();
+      query->param()[fldn] = row[fldn].sval();
       }
       query->execute();
 
@@ -191,7 +191,7 @@ cout<<ik<<" "<<row[ik].name()<<" "<<row[ik].sval() << "\n";
       delete query;
       db.close();
 
-*/
+    */
 
   }
   catch(Event& e) {
