@@ -473,11 +473,13 @@ sub parseFunction {
 	if ($idlrettype eq "STRING") {
 	    print OutSrc "  idlret.type = IDL_TYP_STRING;\n";
 	    print OutSrc "  idlret.flags = IDL_V_DYNAMIC;\n";
+	    print OutSrc "  idlret.flags2 = IDL_V_DYNAMIC;\n";
 	    print OutSrc "  IDL_StrStore(&(idlret.value.str), ret);\n";
 	}
 	else {
 	    print OutSrc "  idlret.type = IDL_TYP_$idlrettype;\n";
 	    print OutSrc "  idlret.flags = 0;\n";
+	    print OutSrc "  idlret.flags2 = 0;\n";
 	    print OutSrc "  idlret.value." . IDLtype2UnionValue($idlrettype) . " = ";
 
 	    if ($idlrettype eq "PTR") {
