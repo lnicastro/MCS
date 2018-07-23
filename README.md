@@ -20,6 +20,9 @@ Furthermore MCS offers not only a number of C++ wrappers around the system's lib
 3. Perl
 4. PCRE (libpcre++-dev)
 
+MySQL 8 requires
+- libssl-dev
+
 Optional but suggested:
 - cfitsio (libcfitsio-dev)
 - curl (libcurlpp-dev)
@@ -42,6 +45,13 @@ touch configure aclocal.m4 Makefile.in
 ./configure [... see options ...]
 make
 sudo make install
+```
+
+Also do not forget, at first installation, to make the shared library visible to other packages via
+```
+(Linux)  sudo ldconfig /usr/local/lib
+or
+(Mac OS) sudo update_dyld_shared_cache
 ```
 
 Tested on Linux and Mac OS with Xcode+MacPorts.
