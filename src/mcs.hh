@@ -141,7 +141,7 @@ using namespace std;
 //If MySQL facilities are disabled we need the following declaration to
 //compile correctly.
 #define MYSQL_BIND char
-#define my_bool bool
+//#define my_bool bool  // Avoid: MySQL 8 no longer uses it
 
 //This has been copied from MySQL's include file mysql_time.h
 typedef struct st_mysql_time
@@ -3124,7 +3124,8 @@ private:
   bool lisunsigned;
 
   //!The object has a null value.
-  my_bool lisnull;
+  //my_bool lisnull;  // Avoid: MySQL 8 no longer uses it
+  bool lisnull;
 
   //!If the AUTO_INCREMENT flag is true.
   bool lautoincr;
