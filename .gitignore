@@ -38,5 +38,10 @@ autom4te.cache
 *.out
 *.app
 
-# Makefile
+# Makefile etc.
 Makefile
+aclocal.m4
+config.log
+config.status
+libtool
+share/client/idl/c2idl.pl
