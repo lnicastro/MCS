@@ -1,6 +1,9 @@
+# Local dirs
+autom4te.cache
+
 # Dependencies
-src/.deps
-src/.libs
+.deps/
+.libs/
 
 # Prerequisites
 *.d
@@ -34,3 +37,6 @@ src/.libs
 *.exe
 *.out
 *.app
+
+# Makefile
+Makefile
