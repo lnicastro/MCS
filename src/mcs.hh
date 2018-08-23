@@ -137,8 +137,10 @@ using namespace std;
 #include <mysql.h>
 #define MYSQL_SOCK NULL
 
-#ifndef my_bool
-#define my_bool bool  // MySQL 8 no longer defines it
+#include <mysql_version.h>
+
+#if MYSQL_VERSION_ID >= 80000
+#define my_bool bool  // MySQL 8 no longer uses it
 #endif
 
 #else
