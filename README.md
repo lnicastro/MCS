@@ -4,7 +4,7 @@ MCS is a collection of high level classes and functions designed to easily imple
 
 1. multi thread applications;
 2. network applications (through TCP);
-3. database (MySQL) applications;
+3. database (MySQL / MariaDB) applications;
 4. information servers;
 5. FITS file access.
 
@@ -57,3 +57,8 @@ or
 Tested on Linux and Mac OS with Xcode+MacPorts.
 
 See the [documentation](doc/mcs.pdf).
+
+## IDL contributed libraries
+
+In order to help IDL users to write code querying MySQL/MariaDB tables, iIn the directory `contrib/libidl` you can find two user contributed libraries and some demo programs.
+You can edit and adapt them to better meet your needs. If you have request of changes / additions or you want to share your code, just let us know. 
