@@ -58,7 +58,38 @@ Tested on Linux and Mac OS with Xcode+MacPorts.
 
 See the [documentation](doc/mcs.pdf).
 
+## Known issues
+
+- PCRE on Mac OS
+Mac OS with a recent version of Xcode (4.2 or later) use `clang` as default compiler, whereas MCS requires `gcc`.
+Apparently, at some point, the Ports installed PCRE libraries became incompatible with calls from `gcc` (at least v.6) compiled libraries (or buggy) and at runtime one can get an error like this:
+```
+dyld: lazy symbol binding failed: Symbol not found: __ZN7pcrecpp2RE4InitERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPKNS_10RE_OptionsE
+  Referenced from: /usr/local/lib/libmcs.4.dylib
+  Expected in: flat namespace
+```
+
+The easiest solution is to use a local compiled PCRE library: download it, configure choosing a convenient directory and use the `--with-pcre=` option when configuring MCS. For example:
+```
+cd Packages
+wget https://ftp.pcre.org/pub/pcre/pcre-8.42.tar.bz2
+tar jxvf pcre-8.42.tar.bz2
+cd pcre-8.42
+./configure --prefix=/usr/local/pcre
+make
+make install
+```
+
+Then go into the MCS source directory and run (e.g.):
+```
+./configure --enable-cfitsio --enable-idl --with-pcre=/usr/local/pcre
+```
+
 ## IDL contributed libraries
 
-In order to help IDL users to write code querying MySQL/MariaDB tables, iIn the directory `contrib/libidl` you can find two user contributed libraries and some demo programs.
+In order to help IDL users to write code querying MySQL/MariaDB tables, in the directory `contrib/libidl` you can find two user contributed libraries and some demo programs.
 You can edit and adapt them to better meet your needs. If you have request of changes / additions or you want to share your code, just let us know. 
+
+## Fortran contributed library
+
+TBD. See MCS reference website.
