@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
 MCS test suite.
-Giorgio Calderone, INAF/IFC Palermo, gcalderone@ifc.inaf.it
-Luciano Nicastro, INAF/IASF Bologna, nicastro@iasfbo.inaf.it
+Giorgio Calderone, INAF/OA Trieste, gorgio.calderone@inaf.it
+Luciano Nicastro, INAF/OAS Bologna, luciano.nicastro@inaf.it
 ----------------------------------------------------------------------
 
 This directory contains the test suite for MCS software. These program can be
@@ -18,6 +18,5 @@ Before running the programs you should check that you have:
    GRANT ALL PRIVILEGES ON test.* TO mcstest@localhost IDENTIFIED BY 'mcstest';
 
 
-The programs can be compiled using the command 'make' in this
-directory. The entire suite can be executed using the command 'make
-test'.
+The programs can be compiled using the command 'make -f Makefile_test' in this
+directory. The entire suite can be executed using the command 'make -f Makefile_test test'.
