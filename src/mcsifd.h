@@ -23,7 +23,7 @@
 
 /*
   IFD - C/C++ to C Interface Descriptor
-  Giorgio Calderone - gcalderone@ifc.inaf.it
+  Giorgio Calderone - giorgio.calderone@inaf.it
 */
 
 #define NOARGS
@@ -39,7 +39,7 @@
 
 struct ifd_status {
     int  error;
-    char errormsg[IFD_ERR_LEN];
+    char errormsg[IFD_ERR_LEN+1];
     void* data;
 };
 
