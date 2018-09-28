@@ -41,12 +41,14 @@ WARNING: 'aclocal-1.16' is missing on your system.
 follow this command sequence:
 
 ```
-touch configure aclocal.m4 Makefile.in
+touch configure aclocal.m4 Makefile.in src/mcs_config.h.in
 ./configure [... see options ...]
 make
 sudo make install
 ```
 
+Note that if you forget to issue `touch src/mcs_config.h.in` it may cause its recreation with loss of some variables setting.
+You will also need `pdflatex` to recreate `mcs.pdf`. You can disable this manually in the appropriate `Makefile.in`.
 Also do not forget, at first installation, to make the shared library visible to other packages via
 ```
 (Linux)  sudo ldconfig /usr/local/lib
