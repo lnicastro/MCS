@@ -937,7 +937,7 @@ AC_DEFINE_UNQUOTED([ENABLE_DEBUG], $myenable_debug, [ENABLE_DEBUG])
 
 MCS_VERSION="$PACKAGE_VERSION"
 mcs_cflags="$CPPFLAGS $CXXFLAGS"
-mcs_libs="-lmcsjson -lmcs"
+mcs_libs="-lmcs -lmcsjson"
 #MCS_LIBDEPS="-L/$prefix/lib -L${prefix}/lib"
 
 AC_DEFINE_DIR([DATADIR], [datadir/mcs], [Share directory for MCS])

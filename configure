@@ -19176,7 +19176,7 @@ _ACEOF
 
 MCS_VERSION="$PACKAGE_VERSION"
 mcs_cflags="$CPPFLAGS $CXXFLAGS"
-mcs_libs="-lmcsjson -lmcs"
+mcs_libs="-lmcs -lmcsjson"
 #MCS_LIBDEPS="-L/$prefix/lib -L${prefix}/lib"
 
 
