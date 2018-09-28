@@ -47,5 +47,4 @@ aclocal.m4
 config.log
 config.status
 libtool
-src/mcs_config.h
 share/client/idl/c2idl.pl
