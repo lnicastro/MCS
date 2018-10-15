@@ -1,0 +1,6 @@
+To execute the demo scripts, first run:
+"
+idl2mcs
+"
+Just hit return.
+Also verify that the logical links idl2mcs.dlm and idl2mcs.so point to existing files.
