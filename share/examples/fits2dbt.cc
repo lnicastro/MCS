@@ -32,6 +32,7 @@
   -H: create additional DB table with header content
   -l: just list header content (no DB table is written)
   -e: select which extension (HDU starting from 1) you want to import (def. last one)
+  -o: overwrite table if it exists
   -q: do not show info about header(s) and column types
   -S: insert one record at a time (very low performance)
   -v: be verbose
@@ -58,7 +59,7 @@ using namespace mcs;
 #define DEF_DBNA "test"
 //#define DEF_TBL  "mcstest"
 
-static string VERID="Ver 0.1d, 03-07-2017, LN@INAF-IASF";
+static string VERID="Ver 0.2a, 23-10-2018, LN@INAF-OAS";
 
 // Global variables
 char my_host[32]=DEF_HOST, my_user[32]=DEF_USER, my_pass[32]=DEF_PASS,
@@ -127,6 +128,7 @@ usage(char *name) {
 		 <<"  -D: print data for the selected HDU (no DB table is written)\n"
 		 <<"  -H: create additional DB table with header content\n"
 		 <<"  -l: just list header content (no DB table is written)\n"
+		 <<"  -o: overwrite table if it exists\n"
 		 <<"  -q: do not show info about header(s) and column types\n"
 		 <<"  -S: insert one record at a time (very low performance)\n"
 		 <<"  -v: be verbose\n"
@@ -146,7 +148,7 @@ int main(int argc, char* argv[])
 {
 	FITSReader fits;
 	int i, j, hdu, nflds=0;
-	bool kwds=false, hdr_tab=false, list_only=false, be_quite=false, verbose=false,
+	bool kwds=false, hdr_tab=false, list_only=false, overwrite=false, be_quite=false, verbose=false,
 		tab_given=false, tab_written=false, print_data=false, Slow=false;
 	unsigned short hdu_sel=0;
 	string tabname, tabname_h;
@@ -178,6 +180,9 @@ int main(int argc, char* argv[])
 							break;
 						case 'l':
 							list_only = true;
+							break;
+						case 'o':
+							overwrite = true;
 							break;
 						case 'q':
 							be_quite = true;
@@ -287,7 +292,7 @@ int main(int argc, char* argv[])
 					if (!tab_given)
 						tabname = fclean(string(argv[i]), ".") +"_HDU"+ itos(hdu);
 					//if (verbose) cout <<"Writing to table: "<< my_db <<"."<< tabname <<"\n";
-					cout <<"Writing to table: "<< my_db <<"."<< tabname <<"\n";
+					cout <<"Writing to table: "<< my_db <<".`"<< tabname <<"`\n";
 					Types type;
 
 					// Header table if requested
@@ -337,6 +342,10 @@ int main(int argc, char* argv[])
 
 					flds += ")";
 
+					// Clean existing table if requested
+					if (overwrite) {
+						qry->query("DROP TABLE IF EXISTS `"+ tabname +"`");
+					}
 					// Create DB table
 					qry->query("CREATE TABLE IF NOT EXISTS `"+ tabname +"` "+ flds);
 
