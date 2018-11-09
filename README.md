@@ -63,7 +63,8 @@ See the [documentation](doc/mcs.pdf).
 ## Known issues
 
 - PCRE on Mac OS
-Mac OS with a recent version of Xcode (4.2 or later) use `clang` as default compiler, whereas MCS requires `gcc`.
+
+systems with a recent version of Xcode (4.2 or later) use `clang` as default compiler, whereas MCS requires `gcc`.
 Apparently, at some point, the Ports installed PCRE libraries became incompatible with calls from `gcc` (at least v.6) compiled libraries (or buggy) and at runtime one can get an error like this:
 ```
 dyld: lazy symbol binding failed: Symbol not found: __ZN7pcrecpp2RE4InitERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPKNS_10RE_OptionsE
@@ -71,9 +72,8 @@ dyld: lazy symbol binding failed: Symbol not found: __ZN7pcrecpp2RE4InitERKNSt7_
   Expected in: flat namespace
 ```
 
-The easiest solution is to use a local compiled PCRE library: download it, configure choosing a convenient directory and use the `--with-pcre=` option when configuring MCS. For example:
+The easiest solution is to use a local compiled PCRE library: download it, configure choosing a convenient directory and use the `--with-pcre=` option when configuring MCS. For example, in a directory if your choice:
 ```
-cd Packages
 wget https://ftp.pcre.org/pub/pcre/pcre-8.42.tar.bz2
 tar jxvf pcre-8.42.tar.bz2
 cd pcre-8.42
