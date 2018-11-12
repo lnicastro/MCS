@@ -30,7 +30,7 @@ Optional but suggested:
 
 ## Compile and install
 
-To avoid autotools requirements with a message like this:
+**Note:** If you download the code via ``git clone``, to avoid autotools requirements with a message like this:
 ```
 ...
 MCS/config/missing: line 81: aclocal-1.16: command not found
