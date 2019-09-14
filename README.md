@@ -8,11 +8,11 @@ MCS is a collection of high level classes and functions designed to easily imple
 4. information servers;
 5. FITS file access.
 
-MCS contains already a working information server, able to serve several client simultaneosly and give a database access.
+MCS contains already a working information server, able to serve several clients simultaneosly and give a database access.
 
 If you want to rapidly develop your application without worrying about networking, threading, and database code,
 MCS does the hard work for you, but doesn't pretend that you are a good low level programmer, or even that you know what is a socket.
-Furthermore MCS offers not only a number of C++ wrappers around the system's library, but a set of high level classes aimed to solve the more common problems.
+Furthermore MCS offers not only a number of C++ wrappers around the system's library, but also a set of high level classes aimed to solve the more common problems.
 
 ## Requirements
 1. MySQL / MariaDB (libmysqlclient-dev)
@@ -48,7 +48,7 @@ sudo make install
 ```
 
 Note that if you forget to issue `touch src/mcs_config.h.in` it may cause its recreation with loss of some variables setting.
-You will also need `pdflatex` to recreate `mcs.pdf`. You can disable this manually in the appropriate `Makefile.in`.
+You will also need `pdflatex` to recreate `mcs.pdf` (can be disabled in `doc/Makefile.in`).
 Also do not forget, at first installation, to make the shared library visible to other packages via
 ```
 (Linux)  sudo ldconfig /usr/local/lib
@@ -58,21 +58,21 @@ or
 
 Tested on Linux and Mac OS with Xcode+MacPorts.
 
-See the [documentation](doc/mcs.pdf).
+See the [documentation](doc/mcs.pdf) or the [Doxygen reference doc](http://ross.oas.inaf.it/mcs/). Note: not updated for the last versions. 
 
 ## Known issues
 
 - PCRE on Mac OS
 
 systems with a recent version of Xcode (4.2 or later) use `clang` as default compiler, whereas MCS requires `gcc`.
-Apparently, at some point, the Ports installed PCRE libraries became incompatible with calls from `gcc` (at least v.6) compiled libraries (or buggy) and at runtime one can get an error like this:
+Apparently, at some point, the MacPorts installed PCRE libraries became incompatible with calls from `gcc` (at least v.6) compiled libraries (or buggy) and at runtime one can get an error like this:
 ```
 dyld: lazy symbol binding failed: Symbol not found: __ZN7pcrecpp2RE4InitERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPKNS_10RE_OptionsE
   Referenced from: /usr/local/lib/libmcs.4.dylib
   Expected in: flat namespace
 ```
 
-The easiest solution is to use a local compiled PCRE library: download it, configure choosing a convenient directory and use the `--with-pcre=` option when configuring MCS. For example, in a directory if your choice:
+The easiest solution is to use a local compiled PCRE library: download and configure it choosing a convenient directory and use the `--with-pcre=` option when configuring MCS. For example, in a directory if your choice:
 ```
 wget https://ftp.pcre.org/pub/pcre/pcre-8.42.tar.bz2
 tar jxvf pcre-8.42.tar.bz2
