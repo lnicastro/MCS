@@ -138,7 +138,7 @@ using namespace std;
 #define MYSQL_SOCK NULL
 
 
-#if MYSQL_VERSION_ID >= 80000
+#if MYSQL_VERSION_ID >= 80000  &&  MY_VERSION_ID < 100000
 #define my_bool bool  // MySQL 8 no longer uses it
 #endif
 

@@ -1,3 +1,6 @@
+2020-05-15  LN, ver. 0.3.3-alpha6
+	- configure.ac updated to avoid autools requirements on the client machine.
+
 2018-05-28  Luciano Nicastro <nicastro@iasfbo.inaf.it>, ver. 0.3.3-alpha6
 	- Improved performance in data import. See Query::prepare_with_parameters();
 	- Fixed IDL interface for new strucure definition in "idl_export.h".

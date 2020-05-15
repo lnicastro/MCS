@@ -77,7 +77,7 @@
 
 /*
   IFD - C/C++ to C Interface Descriptor
-  Giorgio Calderone - gcalderone@ifc.inaf.it
+  Giorgio Calderone - giorgio.calderone@inaf.it
 */
 
 
@@ -93,7 +93,7 @@
 
 struct ifd_status {
     int error;
-    char errormsg[200];
+    char errormsg[200 +1];
     void* data;
 };
 

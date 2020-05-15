@@ -28,28 +28,17 @@ Optional but suggested:
 - curl (libcurlpp-dev)
 - swig
 
+You will also need `pdflatex` to recreate `mcs.pdf` (can be disabled in `doc/Makefile.in`).
+
 ## Compile and install
 
-**Note:** If you download the code via ``git clone``, to avoid autotools requirements with a message like this:
 ```
-...
-MCS/config/missing: line 81: aclocal-1.16: command not found
-WARNING: 'aclocal-1.16' is missing on your system.
-...
-```
-
-follow this command sequence:
-
-```
-touch configure aclocal.m4 Makefile.in src/mcs_config.h.in
 ./configure [... see options ...]
 make
 sudo make install
 ```
 
-Note that if you forget to issue `touch src/mcs_config.h.in` it may cause its recreation with loss of some variables setting.
-You will also need `pdflatex` to recreate `mcs.pdf` (can be disabled in `doc/Makefile.in`).
-Also do not forget, at first installation, to make the shared library visible to other packages via
+At first installation, do not forget to make the shared library visible to other packages via
 ```
 (Linux)  sudo ldconfig /usr/local/lib
 or
@@ -86,6 +75,24 @@ Then go into the MCS source directory and run (e.g.):
 ```
 ./configure --enable-cfitsio --enable-idl --with-pcre=/usr/local/pcre
 ```
+
+- `autotools` requirements
+
+If you download the code via ``git clone``, and see a message like this:
+```
+...
+MCS/config/missing: line 81: aclocal-1.16: command not found
+WARNING: 'aclocal-1.16' is missing on your system.
+...
+```
+
+then, before the `configure` and `make` commands, execute:
+
+```
+touch configure aclocal.m4 Makefile.in src/mcs_config.h.in
+```
+
+For any other issue please contact the authors.
 
 ## IDL contributed libraries
 

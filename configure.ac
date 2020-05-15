@@ -969,6 +969,14 @@ AC_CONFIG_FILES([
    share/scripts/idl2mcs
    share/examples/Makefile
 ])
+
+
+# Touch aclocal managed files - ignore returned status
+AC_MSG_NOTICE([])  
+AC_MSG_NOTICE([...touching 'configure aclocal.m4 Makefile.in src/config.h.in])
+dummy=`touch configure aclocal.m4 Makefile.in src/mcs_config.h.in`
+AC_MSG_NOTICE([])
+
 AC_OUTPUT
 
 
@@ -1030,4 +1038,3 @@ Perl path:            $mypath_perl
 The package has been configured correctly (see summary above).
 Type 'make' to compile, and 'make install' to install.
 myEOF
-

@@ -19395,6 +19395,17 @@ MCS_CONFIG="share/scripts/mcs-config"
 #   extra/Makefile
 ac_config_files="$ac_config_files Makefile version contrib/Makefile contrib/libjson/Makefile src/Makefile src/doc.h doc/Makefile doc/Doxyfile share/Makefile share/client/Makefile share/client/idl/Makefile share/client/idl/c2idl.pl share/client/php/Makefile share/client/python/Makefile share/client/perl/Makefile share/scripts/Makefile share/scripts/mcs-config share/scripts/idl2mcs share/examples/Makefile"
 
+
+
+# Touch aclocal managed files - ignore returned status
+{ $as_echo "$as_me:${as_lineno-$LINENO}: " >&5
+$as_echo "$as_me: " >&6;}
+{ $as_echo "$as_me:${as_lineno-$LINENO}: ...touching 'configure aclocal.m4 Makefile.in src/config.h.in" >&5
+$as_echo "$as_me: ...touching 'configure aclocal.m4 Makefile.in src/config.h.in" >&6;}
+dummy=`touch configure aclocal.m4 Makefile.in src/mcs_config.h.in`
+{ $as_echo "$as_me:${as_lineno-$LINENO}: " >&5
+$as_echo "$as_me: " >&6;}
+
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -21240,7 +21251,9 @@ $as_echo X/"$am_mf" |
     { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
 $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
 as_fn_error $? "Something went wrong bootstrapping makefile fragments
-    for automatic dependency tracking.  Try re-running configure with the
+    for automatic dependency tracking.  If GNU make was not used, consider
+    re-running the configure script with MAKE=\"gmake\" (or whatever is
+    necessary).  You can also try re-running configure with the
     '--disable-dependency-tracking' option to at least be able to build
     the package (albeit without support for automatic dependency tracking).
 See \`config.log' for more details" "$LINENO" 5; }
@@ -22205,4 +22218,3 @@ Perl path:            $mypath_perl
 The package has been configured correctly (see summary above).
 Type 'make' to compile, and 'make install' to install.
 myEOF
-

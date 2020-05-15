@@ -1,4 +1,6 @@
-Authors of mcs.
+Authors of MCS.
 See also the files THANKS and ChangeLog.
 
-Giorgio Calderone designed and implemented mcs.
+Giorgio Calderone <giorgio.calderone@inaf.it> designed and implemented mcs.
+Luciano Nicastro <luciano.nicastro@inaf.it> contributed to many client side compnents, contributed libraries,
+MySQL 8 compatibility plus porting to MacOS.
