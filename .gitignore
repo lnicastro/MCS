@@ -48,3 +48,4 @@ config.log
 config.status
 libtool
 share/client/idl/c2idl.pl
+*~
