@@ -14,6 +14,10 @@ If you want to rapidly develop your application without worrying about networkin
 MCS does the hard work for you, but doesn't pretend that you are a good low level programmer, or even that you know what is a socket.
 Furthermore MCS offers not only a number of C++ wrappers around the system's library, but also a set of high level classes aimed to solve the more common problems.
 
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7629989.svg)](https://doi.org/10.5281/zenodo.7629989)
+
+
 ## Requirements
 1. MySQL / MariaDB (libmysqlclient-dev)
 2. make or gmake
